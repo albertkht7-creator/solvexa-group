@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "SOLVEXA GROUP | Szkolenia Sprzedażowe — Albert Kohut",
@@ -22,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="pl" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className={GeistSans.className}>
+        <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
