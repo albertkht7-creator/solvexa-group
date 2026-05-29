@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/kacha/.claude/**)",
+      "Bash(ls ~/.claude/plugins/ 2>/dev/null || echo \"No plugins directory\")",
+      "Read(//Users/kacha/.claude/plugins/**)",
+      "Bash(claude plugin *)",
+      "Bash(claude plugins *)",
+      "Bash(gh api *)",
+      "WebFetch(domain:api.github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(code --add-mcp '{\"name\":\"magic\",\"type\":\"stdio\",\"command\":\"npx\",\"args\":[\"-y\",\"@21st-dev/magic@latest\"],\"env\":{\"API_KEY\":\"8cd175ab065a750fb10db91cd95a43cacde835f28a1100df4ff5ff7fe07c2197\"}}')",
+      "Bash(python3 -)",
+      "Read(//Users/kacha/**)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('projects', {}\\).get\\('/Users/kacha/SOLVEXA GROUP', {}\\).get\\('mcpServers', {}\\), indent=2\\)\\)\")"
+    ]
+  }
+}
