@@ -14,7 +14,7 @@ export const courses: Course[] = [
     title: "Cold Calling",
     subtitle: "Jak przestać się bać i zacząć sprzedawać",
     description:
-      "Metodyka zimnych telefonów, które działają. Skrypty, obiekcje, tonacja — wszystko co potrzebujesz żeby słyszeć „tak" częściej niż „nie".",
+      "Metodyka zimnych telefonow, ktore dzialaja. Skrypty, obiekcje, tonacja - wszystko co potrzebujesz zeby slyszec 'tak' czesciej niz 'nie'.",
     tags: ["Cold Calling", "Skrypty", "Obiekcje", "B2B", "Prospecting"],
     modules: [
       {

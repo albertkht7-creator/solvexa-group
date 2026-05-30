@@ -90,7 +90,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
       <section className="px-6 py-16 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold text-white mb-8">Program kursu</h2>
-          <Accordion type="single" collapsible className="space-y-3">
+          <Accordion className="space-y-3">
             {course.modules.map((module, i) => (
               <AccordionItem
                 key={module.title}
