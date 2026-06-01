@@ -44,7 +44,7 @@ export default function Stats() {
   const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
-    <section ref={ref} className="py-24 px-6 bg-[#0d0d0d] border-y border-white/8">
+    <section ref={ref} className="py-24 px-6 border-y border-gray-200">
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10">
         {stats.map((s, i) => (
           <motion.div
@@ -54,10 +54,10 @@ export default function Stats() {
             transition={{ duration: 0.5, delay: i * 0.1 }}
             className="text-center"
           >
-            <div className="text-5xl md:text-6xl font-bold text-white tracking-tight">
+            <div className="text-5xl md:text-6xl font-bold text-gray-900 tracking-tight">
               <Counter value={s.value} suffix={s.suffix} />
             </div>
-            <p className="text-sm text-white/40 mt-2">{s.label}</p>
+            <p className="text-sm text-gray-400 mt-2">{s.label}</p>
           </motion.div>
         ))}
       </div>

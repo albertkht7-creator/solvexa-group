@@ -17,13 +17,13 @@ const testimonials = [
     src: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80",
   },
   {
-    quote: "Albert nie uczy teorii. Każda sesja to konkretne narzędzia, które wdrożyłem już następnego dnia. Mój pipeline podwoił się w ciągu dwóch miesięcy.",
+    quote: "Albert nie uczy teorii. Każda sesja to konkretne narzędzia, które wdrożyłam już następnego dnia. Ilość zainteresowanych klientów zwiększyła się dwukrotnie w ciągu 3 miesięcy od wprowadzenia zaproponowanych zmian.",
     name: "Karolina M.",
     designation: "Sales Manager, fintech",
     src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80",
   },
   {
-    quote: "Mój pipeline wzrósł o 40% w ciągu 8 tygodni od mentoringu. Nareszcie mam strukturę, a nie chaos w głowie.",
+    quote: "Dzięki optymalizacji procesów w firmie mogę skupić się na rzeczach związanych z jej rozwojem. Nareszcie mam strukturę, a nie chaos w głowie.",
     name: "Paweł R.",
     designation: "Founder, B2B startup",
     src: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80",
@@ -41,7 +41,7 @@ export default function Testimonials() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-24 px-6 bg-[#0a0a0a]">
+    <section ref={ref} className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,8 +49,8 @@ export default function Testimonials() {
           transition={{ duration: 0.6 }}
           className="mb-14"
         >
-          <span className="text-xs font-semibold tracking-widest text-white/40 uppercase">Opinie</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3">Co mówią klienci.</h2>
+          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Opinie</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3">Co mówią klienci.</h2>
         </motion.div>
 
         <motion.div
@@ -62,11 +62,11 @@ export default function Testimonials() {
             testimonials={testimonials}
             autoplay={true}
             colors={{
-              name: "#ffffff",
-              designation: "#9ca3af",
-              testimony: "#d1d5db",
-              arrowBackground: "#1a1a1a",
-              arrowForeground: "#f1f1f7",
+              name: "#111827",
+              designation: "#6b7280",
+              testimony: "#374151",
+              arrowBackground: "#f3f4f6",
+              arrowForeground: "#111827",
               arrowHoverBackground: "#3b82f6",
             }}
             fontSizes={{

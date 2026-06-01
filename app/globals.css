@@ -2,6 +2,32 @@
 @import "tw-animate-css";
 @plugin "@tailwindcss/typography";
 
+.dark {
+  --background: oklch(0 0 0);
+}
+
+/* Aurora animation */
+@theme inline {
+  --animate-aurora: aurora 60s linear infinite;
+}
+
+@keyframes aurora {
+  from { background-position: 50% 50%, 50% 50%; }
+  to   { background-position: 350% 50%, 350% 50%; }
+}
+
+/* Color variables required by AuroraBackground */
+:root {
+  --white: #ffffff;
+  --black: #000000;
+  --transparent: transparent;
+  --blue-300: #93c5fd;
+  --blue-400: #60a5fa;
+  --blue-500: #3b82f6;
+  --indigo-300: #a5b4fc;
+  --violet-200: #ddd6fe;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -31,23 +57,23 @@
 }
 
 :root {
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(1 0 0);
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(1 0 0);
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(1 0 0);
-  --primary: oklch(1 0 0);
-  --primary-foreground: oklch(0.08 0 0);
-  --secondary: oklch(0.15 0 0);
-  --secondary-foreground: oklch(1 0 0);
-  --muted: oklch(0.5 0 0);
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1 0 0);
+  --primary: oklch(0.1 0 0);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0 0);
+  --secondary-foreground: oklch(0.1 0 0);
+  --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.5 0 0);
   --accent: oklch(0.65 0.18 250);
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(1 0 0 / 8%);
-  --input: oklch(1 0 0 / 8%);
+  --border: oklch(0 0 0 / 10%);
+  --input: oklch(0 0 0 / 10%);
   --ring: oklch(0.556 0 0);
   --radius: 0.75rem;
 }
@@ -57,7 +83,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-[#0a0a0a] text-white antialiased;
+    @apply bg-white text-gray-900 antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   html {

@@ -15,12 +15,12 @@ export default function CredibilityStrip() {
   const inView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="border-y border-white/8 bg-[#0d0d0d] py-6 px-6 overflow-hidden">
+    <section ref={ref} className="border-y border-gray-200 py-10 px-6 overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={inView ? { opacity: 1 } : {}}
         transition={{ duration: 0.6 }}
-        className="max-w-6xl mx-auto flex flex-wrap items-center justify-center gap-8 md:gap-16"
+        className="max-w-7xl mx-auto flex flex-nowrap items-center justify-between gap-6 overflow-x-auto"
       >
         {badges.map((b, i) => (
           <motion.div
@@ -30,8 +30,8 @@ export default function CredibilityStrip() {
             transition={{ delay: i * 0.08, duration: 0.4 }}
             className="flex flex-col items-center text-center"
           >
-            <span className="text-white font-semibold text-sm">{b.label}</span>
-            <span className="text-white/40 text-xs mt-0.5">{b.sub}</span>
+            <span className="text-gray-900 font-bold text-xl md:text-2xl tracking-tight">{b.label}</span>
+            <span className="text-gray-400 text-sm mt-1">{b.sub}</span>
           </motion.div>
         ))}
       </motion.div>

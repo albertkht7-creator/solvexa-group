@@ -25,10 +25,10 @@ export default function Navbar() {
     <header
       className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] max-w-4xl ${
         isOpen ? "rounded-2xl" : "rounded-full"
-      } border border-white/10 bg-[#1f1f1f80] backdrop-blur-md px-6 py-3`}
+      } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-3`}
     >
       <div className="flex items-center justify-between gap-6">
-        <Link href="/" className="font-semibold text-white tracking-tight text-sm">
+        <Link href="/" className="font-semibold text-gray-900 tracking-tight text-sm">
           SOLVEXA GROUP
         </Link>
 
@@ -37,7 +37,7 @@ export default function Navbar() {
             <Link
               key={l.href}
               href={l.href}
-              className="text-sm text-white/60 hover:text-white transition-colors"
+              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
             >
               {l.label}
             </Link>
@@ -47,14 +47,14 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           <Link
             href="/#kontakt"
-            className="text-sm px-4 py-2 rounded-full bg-white text-black font-medium hover:bg-white/90 transition-colors"
+            className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-800 transition-colors"
           >
             Umów rozmowę
           </Link>
         </div>
 
         <button
-          className="md:hidden text-white/70 hover:text-white"
+          className="md:hidden text-gray-500 hover:text-gray-900"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle menu"
         >
@@ -77,7 +77,7 @@ export default function Navbar() {
                   key={l.href}
                   href={l.href}
                   onClick={() => setIsOpen(false)}
-                  className="text-white/70 hover:text-white transition-colors text-center"
+                  className="text-gray-500 hover:text-gray-900 transition-colors text-center"
                 >
                   {l.label}
                 </Link>
@@ -85,7 +85,7 @@ export default function Navbar() {
               <Link
                 href="/#kontakt"
                 onClick={() => setIsOpen(false)}
-                className="text-sm px-4 py-2 rounded-full bg-white text-black font-medium text-center"
+                className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium text-center"
               >
                 Umów rozmowę
               </Link>

@@ -47,8 +47,8 @@ export default function Hero() {
       />
 
       {/* Dark overlays */}
-      <div className="absolute inset-0 bg-black/60" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-white" />
 
       {/* Shader overlay */}
       {shaderVisible && (

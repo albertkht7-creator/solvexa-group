@@ -2,52 +2,32 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { CanvasRevealEffect } from "@/components/ui/canvas-reveal-effect";
 
 export default function About() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="o-mnie" ref={ref} className="relative py-24 px-6 overflow-hidden">
-      {/* Canvas reveal background */}
-      {inView && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 pointer-events-none"
-        >
-          <CanvasRevealEffect
-            animationSpeed={3}
-            containerClassName="bg-transparent"
-            colors={[[255, 255, 255]]}
-            dotSize={2}
-            showGradient={true}
-            reverse={false}
-          />
-        </motion.div>
-      )}
-
-      <div className="relative z-10 max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+    <section id="o-mnie" ref={ref} className="py-24 px-6">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Text */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-xs font-semibold tracking-widest text-white/40 uppercase">O mnie</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
-            15 lat w okopach<br />sprzedaży B2B.
+          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">O mnie</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6">
+            15 lat doświadczenia<br />w sprzedaży B2B.
           </h2>
-          <div className="space-y-4 text-white/60 text-base leading-relaxed">
+          <div className="space-y-4 text-gray-600 text-base leading-relaxed">
             <p>
-              Nazywam się <span className="text-white font-medium">Albert Kohut</span> i od ponad 15 lat pracuję
+              Nazywam się <span className="text-gray-900 font-medium">Albert Kohut</span> i od ponad 15 lat pracuję
               w sprzedaży B2B, budując wyniki, zespoły i procesy, które realnie dowożą przychód.
             </p>
             <p>
               Przez lata pracowałem z klientami od SMB i mid-market po Enterprise, a dziś jako{" "}
-              <span className="text-white font-medium">Sales Manager w Revolut Business</span> zarządzam
+              <span className="text-gray-900 font-medium">Sales Manager w Revolut Business</span> zarządzam
               zespołem sprzedażowym i wspieram rozwój handlowców w środowisku wysokich oczekiwań
               i szybkiego tempa wzrostu.
             </p>
@@ -61,7 +41,7 @@ export default function About() {
             {["Sales Manager @ Revolut", "15+ lat B2B", "500+ przeszkolonych", "Google for Startups Speaker"].map((tag) => (
               <span
                 key={tag}
-                className="text-xs px-3 py-1.5 rounded-full border border-white/15 text-white/60"
+                className="text-xs px-3 py-1.5 rounded-full border border-gray-300 text-gray-500"
               >
                 {tag}
               </span>

@@ -37,7 +37,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="kontakt" ref={ref} className="py-24 px-6 bg-[#0a0a0a]">
+    <section id="kontakt" ref={ref} className="py-24 px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left */}
         <motion.div
@@ -45,11 +45,11 @@ export default function Contact() {
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7 }}
         >
-          <span className="text-xs font-semibold tracking-widest text-white/40 uppercase">Kontakt</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mt-3 mb-6">
+          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Kontakt</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6">
             Zacznijmy<br />rozmowę.
           </h2>
-          <p className="text-white/50 leading-relaxed mb-10">
+          <p className="text-gray-500 leading-relaxed mb-10">
             Napisz do mnie jeśli chcesz porozmawiać o szkoleniu dla Twojego zespołu, mentoringу
             lub kursach online. Odpiszę w ciągu 24 godzin.
           </p>
@@ -63,8 +63,8 @@ export default function Contact() {
               />
             </div>
             <div>
-              <p className="text-white font-medium">Albert Kohut</p>
-              <p className="text-sm text-white/40">Sales Manager @Revolut Business</p>
+              <p className="text-gray-900 font-medium">Albert Kohut</p>
+              <p className="text-sm text-gray-400">Sales Manager @Revolut Business</p>
             </div>
           </div>
         </motion.div>
@@ -77,65 +77,65 @@ export default function Contact() {
         >
           {status === "sent" ? (
             <div className="text-center py-16">
-              <p className="text-2xl font-bold text-white mb-3">Dziękuję!</p>
-              <p className="text-white/50">Odezwę się do Ciebie w ciągu 24 godzin.</p>
+              <p className="text-2xl font-bold text-gray-900 mb-3">Dziękuję!</p>
+              <p className="text-gray-500">Odezwę się do Ciebie w ciągu 24 godzin.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-xs text-white/40 mb-1.5 block">Imię</label>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Imię</label>
                   <input
                     name="firstName"
                     type="text"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
                     placeholder="Jan"
                   />
                 </div>
                 <div>
-                  <label className="text-xs text-white/40 mb-1.5 block">Nazwisko</label>
+                  <label className="text-xs text-gray-500 mb-1.5 block">Nazwisko</label>
                   <input
                     name="lastName"
                     type="text"
                     required
-                    className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors text-sm"
+                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
                     placeholder="Kowalski"
                   />
                 </div>
               </div>
               <div>
-                <label className="text-xs text-white/40 mb-1.5 block">Nazwa firmy</label>
+                <label className="text-xs text-gray-500 mb-1.5 block">Nazwa firmy</label>
                 <input
                   name="company"
                   type="text"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
                   placeholder="Twoja firma"
                 />
               </div>
               <div>
-                <label className="text-xs text-white/40 mb-1.5 block">Numer telefonu</label>
+                <label className="text-xs text-gray-500 mb-1.5 block">Numer telefonu</label>
                 <input
                   name="phone"
                   type="tel"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
                   placeholder="+48 600 000 000"
                 />
               </div>
               <div>
-                <label className="text-xs text-white/40 mb-1.5 block">Email</label>
+                <label className="text-xs text-gray-500 mb-1.5 block">Email</label>
                 <input
                   name="email"
                   type="email"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/20 focus:outline-none focus:border-white/30 transition-colors text-sm"
+                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
                   placeholder="jan@firma.pl"
                 />
               </div>
               <button
                 type="submit"
                 disabled={status === "sending"}
-                className="w-full py-4 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+                className="w-full py-4 rounded-full bg-gray-900 text-white font-semibold text-sm hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
               >
                 {status === "sending" ? "Wysyłanie..." : "Wyślij wiadomość"}
               </button>
