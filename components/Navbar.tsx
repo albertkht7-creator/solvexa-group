@@ -24,20 +24,26 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] max-w-4xl ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] max-w-6xl ${
         isOpen ? "rounded-2xl" : "rounded-full"
-      } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-3`}
+      } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-1.5`}
     >
       <div className="flex items-center justify-between gap-6">
-        <Link href="/" className="flex-shrink-0">
-          <Image
-            src="/images/solvexa-logo.png"
-            alt="Solvexa Group"
-            width={130}
-            height={36}
-            priority
-            className="h-9 w-auto"
-          />
+        <Link href="/">
+          <div className="flex items-center gap-3 cursor-pointer">
+            <div className="overflow-hidden rounded-lg flex-shrink-0 transition-transform duration-300 hover:scale-[2]">
+              <Image
+                src="/images/solvexa-logo-v2.png"
+                width={56}
+                height={38}
+                alt="Solvexa Group"
+                priority
+              />
+            </div>
+            <span className="font-bold text-sm tracking-widest uppercase text-gray-900 hidden sm:block">
+              Solvexa Group
+            </span>
+          </div>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -66,7 +72,7 @@ export default function Navbar() {
           </div>
           <button
             onClick={() => openModal()}
-            className="text-base px-5 py-2.5 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors"
+            className="text-base px-5 py-2.5 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
           >
             {tr.cta}
           </button>

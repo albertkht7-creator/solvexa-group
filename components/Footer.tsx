@@ -10,15 +10,20 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <div>
-          <Image
-            src="/images/solvexa-logo.png"
-            alt="Solvexa Group"
-            width={130}
-            height={36}
-            className="h-9 w-auto mb-1"
-          />
-          <p className="text-sm text-gray-600 mt-1">{tr.footer.sub}</p>
+        <div className="flex items-center gap-3">
+          <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <div className="overflow-hidden rounded-lg transition-transform duration-300 hover:scale-[2] cursor-pointer">
+              <Image
+                src="/images/solvexa-logo-v2.png"
+                width={96}
+                height={28}
+                alt="Solvexa Group"
+              />
+            </div>
+          </Link>
+          <span className="text-sm text-gray-600">
+            Albert Kohut - Szkolenia Sprzedażowe
+          </span>
         </div>
 
         <nav className="flex flex-wrap gap-6 text-sm text-gray-600">
