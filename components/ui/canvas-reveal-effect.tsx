@@ -180,11 +180,12 @@ const ShaderMesh = ({
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-  }, [size.width, size.height, source]);
+  }, [size.width, size.height, source, uniforms]);
 
   useFrame(({ clock }) => {
-    if (!ref.current) return;
-    (material.uniforms.u_time as THREE.IUniform<number>).value = clock.getElapsedTime();
+    const meshMaterial = ref.current?.material;
+    if (!(meshMaterial instanceof THREE.ShaderMaterial)) return;
+    (meshMaterial.uniforms.u_time as THREE.IUniform<number>).value = clock.getElapsedTime();
   });
 
   return (

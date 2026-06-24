@@ -4,12 +4,11 @@ import * as THREE from "three";
 
 export function ShaderAnimation({ opacity = 1 }: { opacity?: number }) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<{
-    renderer: THREE.WebGLRenderer;
-    animationId: number;
-  } | null>(null);
 
   useEffect(() => {
+    // Skip entirely for users who prefer reduced motion
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     if (!containerRef.current) return;
     const container = containerRef.current;
 
@@ -44,7 +43,7 @@ export function ShaderAnimation({ opacity = 1 }: { opacity?: number }) {
     scene.add(new THREE.Mesh(geometry, material));
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // cap pixel ratio on high-DPI displays
     container.appendChild(renderer.domElement);
 
     const onResize = () => {
@@ -56,22 +55,33 @@ export function ShaderAnimation({ opacity = 1 }: { opacity?: number }) {
     window.addEventListener("resize", onResize);
 
     let animationId = 0;
+    let isVisible = true;
+
     const animate = () => {
-      animationId = requestAnimationFrame(animate);
+      if (!isVisible) return; // stop scheduling entirely when off-screen
       uniforms.time.value = (uniforms.time.value as number) + 0.05;
       renderer.render(scene, camera);
-      if (sceneRef.current) sceneRef.current.animationId = animationId;
+      animationId = requestAnimationFrame(animate); // only reschedule when visible
     };
-    sceneRef.current = { renderer, animationId: 0 };
     animate();
+
+    // Fully stop the rAF loop when hero scrolls off-screen; restart on re-entry
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry.isIntersecting;
+        if (isVisible && !wasVisible) animate(); // restart loop on re-entry
+      },
+      { threshold: 0 }
+    );
+    observer.observe(container);
 
     return () => {
       window.removeEventListener("resize", onResize);
-      if (sceneRef.current) {
-        cancelAnimationFrame(sceneRef.current.animationId);
-        if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
-        renderer.dispose();
-      }
+      cancelAnimationFrame(animationId);
+      observer.disconnect();
+      if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement);
+      renderer.dispose();
       geometry.dispose();
       material.dispose();
     };

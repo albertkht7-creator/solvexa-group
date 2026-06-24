@@ -92,8 +92,57 @@
   h1, h2, h3, h4 {
     letter-spacing: -0.02em;
   }
+  button, [role="button"], a {
+    cursor: pointer;
+  }
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* ── InfiniteGrid: GPU-accelerated grid scroll (replaces useAnimationFrame) ── */
+.grid-scroll-inner {
+  position: absolute;
+  inset: -40px;
+  width: calc(100% + 80px);
+  height: calc(100% + 80px);
+  will-change: transform;
+  animation: grid-scroll 2.67s linear infinite;
+}
+
+@keyframes grid-scroll {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(40px, 40px); }
+}
+
+/* ── Marquee: GPU-accelerated scroll (replaces Framer Motion animate loop) ── */
+.marquee-track {
+  animation: marquee-scroll linear infinite;
+  will-change: transform;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ── CSS containment: prevent layout thrash across sections ── */
+section {
+  contain: layout style;
+}
+
+/* ── Reduced motion: disable all animations for accessibility and perf ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .grid-scroll-inner { animation: none; }
+  .marquee-track { animation: none; }
+  video { display: none; }
 }

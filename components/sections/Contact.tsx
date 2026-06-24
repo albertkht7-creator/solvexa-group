@@ -1,149 +1,105 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import { useContactModal } from "@/lib/contact-modal-context";
+import { useLang } from "@/lib/language-context";
+import { t } from "@/lib/translations";
 
 export default function Contact() {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setStatus("sending");
-    const form = e.currentTarget;
-    const data = {
-      firstName: (form.elements.namedItem("firstName") as HTMLInputElement).value,
-      lastName: (form.elements.namedItem("lastName") as HTMLInputElement).value,
-      company: (form.elements.namedItem("company") as HTMLInputElement).value,
-      phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
-      email: (form.elements.namedItem("email") as HTMLInputElement).value,
-    };
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        setStatus("sent");
-        form.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch {
-      setStatus("error");
-    }
-  };
+  const { openModal } = useContactModal();
+  const { lang } = useLang();
+  const tr = t[lang].contact;
 
   return (
-    <section id="kontakt" ref={ref} className="py-24 px-6">
+    <section id="kontakt" ref={ref} className="py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7 }}
+          style={{ willChange: "opacity, transform" }}
         >
-          <span className="text-xs font-semibold tracking-widest text-gray-400 uppercase">Kontakt</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6">
-            Zacznijmy<br />rozmowę.
-          </h2>
-          <p className="text-gray-500 leading-relaxed mb-10">
-            Napisz do mnie jeśli chcesz porozmawiać o szkoleniu dla Twojego zespołu, mentoringу
-            lub kursach online. Odpiszę w ciągu 24 godzin.
-          </p>
+          <motion.div
+            variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
+            <motion.span
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="inline-block text-xs font-semibold tracking-widest text-white bg-gray-900 uppercase px-3 py-1 rounded-full mb-3"
+            >
+              {tr.tag}
+            </motion.span>
+            <motion.h2
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="text-4xl md:text-5xl font-bold text-gray-900 mt-3 mb-6"
+            >
+              {tr.heading}
+            </motion.h2>
+          </motion.div>
+          <p className="text-gray-700 text-base leading-relaxed mb-10">{tr.body}</p>
           <div className="flex items-center gap-4">
             <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
               <Image
-                src="/images/albert-headshot.jpg"
+                src="/images/albert-quote-bg.jpg"
                 alt="Albert Kohut"
                 fill
+                sizes="56px"
                 className="object-cover object-top"
               />
             </div>
             <div>
-              <p className="text-gray-900 font-medium">Albert Kohut</p>
-              <p className="text-sm text-gray-400">Sales Manager @Revolut Business</p>
+              <p className="text-gray-900 font-semibold text-base">Albert Kohut</p>
+              <p className="text-base text-gray-700">{tr.role}</p>
+              <a href="tel:+00000000000" className="text-sm text-gray-500 hover:text-gray-900 transition-colors mt-0.5 inline-block">
+                +00 000 000 000
+              </a>
             </div>
           </div>
         </motion.div>
 
-        {/* Form */}
+        {/* Right- CTA */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.7, delay: 0.15 }}
+          className="flex flex-col items-start gap-6"
         >
-          {status === "sent" ? (
-            <div className="text-center py-16">
-              <p className="text-2xl font-bold text-gray-900 mb-3">Dziękuję!</p>
-              <p className="text-gray-500">Odezwę się do Ciebie w ciągu 24 godzin.</p>
+          <div className="space-y-5 text-gray-900">
+            <div className="flex items-start gap-4">
+              <span className="text-sm font-mono text-gray-700 mt-0.5 w-6 flex-shrink-0">01</span>
+              <p className="text-base leading-relaxed">{tr.step1}</p>
             </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs text-gray-500 mb-1.5 block">Imię</label>
-                  <input
-                    name="firstName"
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
-                    placeholder="Jan"
-                  />
-                </div>
-                <div>
-                  <label className="text-xs text-gray-500 mb-1.5 block">Nazwisko</label>
-                  <input
-                    name="lastName"
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
-                    placeholder="Kowalski"
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="text-xs text-gray-500 mb-1.5 block">Nazwa firmy</label>
-                <input
-                  name="company"
-                  type="text"
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
-                  placeholder="Twoja firma"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-gray-500 mb-1.5 block">Numer telefonu</label>
-                <input
-                  name="phone"
-                  type="tel"
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
-                  placeholder="+48 600 000 000"
-                />
-              </div>
-              <div>
-                <label className="text-xs text-gray-500 mb-1.5 block">Email</label>
-                <input
-                  name="email"
-                  type="email"
-                  required
-                  className="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-300 focus:outline-none focus:border-gray-400 transition-colors text-sm"
-                  placeholder="jan@firma.pl"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="w-full py-4 rounded-full bg-gray-900 text-white font-semibold text-sm hover:bg-gray-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed mt-2"
-              >
-                {status === "sending" ? "Wysyłanie..." : "Wyślij wiadomość"}
-              </button>
-              {status === "error" && (
-                <p className="text-red-400 text-sm text-center">Coś poszło nie tak. Napisz bezpośrednio na email.</p>
-              )}
-            </form>
-          )}
+            <div className="flex items-start gap-4">
+              <span className="text-sm font-mono text-gray-700 mt-0.5 w-6 flex-shrink-0">02</span>
+              <p className="text-base leading-relaxed">{tr.step2}</p>
+            </div>
+            <div className="flex items-start gap-4">
+              <span className="text-sm font-mono text-gray-700 mt-0.5 w-6 flex-shrink-0">03</span>
+              <p className="text-base leading-relaxed">{tr.step3}</p>
+            </div>
+          </div>
+
+          <button
+            onClick={() => openModal()}
+            className="mt-2 px-8 py-4 rounded-full bg-gray-900 text-white font-semibold text-base hover:bg-gray-700 hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 ease-out"
+          >
+            {tr.cta}
+          </button>
+          <div className="space-y-1">
+            <p className="text-sm text-gray-600">
+              {lang === "PL"
+                ? "30 minut, online (Google Meet), bez zobowiązań."
+                : "30 minutes, online (Google Meet), no commitment."}
+            </p>
+            <p className="text-sm text-gray-700">{tr.note}</p>
+          </div>
         </motion.div>
       </div>
     </section>

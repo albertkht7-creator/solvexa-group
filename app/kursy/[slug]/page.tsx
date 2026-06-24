@@ -17,7 +17,7 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   const course = getCourseBySlug(params.slug);
   if (!course) return {};
   return {
-    title: `${course.title} — SOLVEXA GROUP`,
+    title: `${course.title} - SOLVEXA GROUP`,
     description: course.description,
   };
 }
@@ -127,7 +127,7 @@ export default function CoursePage({ params }: { params: { slug: string } }) {
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-3xl font-bold text-white mb-4">Gotowy na zmianę?</h2>
           <p className="text-white/50 mb-8">
-            Napisz do mnie — omówimy szczegóły i dopasujemy termin.
+            Napisz do mnie - omówimy szczegóły i dopasujemy termin.
           </p>
           <Link
             href="/#kontakt"

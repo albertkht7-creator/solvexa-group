@@ -4,15 +4,20 @@ import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Providers } from "@/components/providers";
 
 export const metadata: Metadata = {
-  title: "SOLVEXA GROUP | Szkolenia Sprzedażowe — Albert Kohut",
-  description:
-    "Praktyczne szkolenia sprzedażowe, consulting i kursy online. 15+ lat B2B, Sales Manager @Revolut Business.",
+  title: "SOLVEXA GROUP | Szkolenia Sprzedażowe - Albert Kohut",
+  description: "Szkolenia sprzedażowe B2B - Albert Kohut, Menedżer sprzedaży w Revolut Biznes. Kursy online, consulting i mentoring dla handlowców, managerów i założycieli.",
+  icons: {
+    icon: "/favicon.ico",
+  },
   openGraph: {
-    title: "SOLVEXA GROUP | Szkolenia Sprzedażowe",
-    description: "Osiągnij swoje cele sprzedażowe z Albert Kohut.",
+    title: "SOLVEXA GROUP | Sales Training — Albert Kohut",
+    description: "B2B sales training with Albert Kohut, Sales Leader at Revolut Business. Online courses, consulting and mentoring for sales reps, managers and founders.",
     type: "website",
+    locale: "pl_PL",
+    alternateLocale: "en_GB",
   },
 };
 
@@ -24,9 +29,11 @@ export default function RootLayout({
   return (
     <html lang="pl" className={`${GeistSans.variable} ${GeistMono.variable}`}>
       <body className={GeistSans.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <Providers>
+          <Navbar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

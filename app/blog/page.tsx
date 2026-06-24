@@ -21,7 +21,7 @@ const posts = [
   {
     slug: "negocjacje-oferty",
     category: "Kariera",
-    title: "Negocjacje oferty pracy w sprzedaży — kompletny przewodnik",
+    title: "Negocjacje oferty pracy w sprzedaży - kompletny przewodnik",
     excerpt: "Większość kandydatów zostawia pieniądze na stole. Dowiedz się jak negocjować.",
     readTime: "8 min",
     date: "2026-05-01",
@@ -29,7 +29,7 @@ const posts = [
 ];
 
 export const metadata = {
-  title: "Blog — SOLVEXA GROUP",
+  title: "Blog - SOLVEXA GROUP",
   description: "Praktyczna wiedza sprzedażowa od Alberta Kohuta.",
 };
 

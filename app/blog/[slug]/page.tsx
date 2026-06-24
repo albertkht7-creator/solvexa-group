@@ -23,7 +23,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }) {
   const post = getPost(params.slug);
   if (!post) return {};
-  return { title: `${post.frontmatter.title} — SOLVEXA GROUP` };
+  return { title: `${post.frontmatter.title}- SOLVEXA GROUP` };
 }
 
 export default function BlogPost({ params }: { params: { slug: string } }) {

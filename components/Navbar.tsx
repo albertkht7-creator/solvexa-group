@@ -1,25 +1,26 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-
-const links = [
-  { label: "Usługi", href: "/#uslugi" },
-  { label: "Kursy", href: "/#kursy" },
-  { label: "O mnie", href: "/#o-mnie" },
-  { label: "Kontakt", href: "/#kontakt" },
-];
+import { useContactModal } from "@/lib/contact-modal-context";
+import { useLang } from "@/lib/language-context";
+import { t } from "@/lib/translations";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const { openModal } = useContactModal();
+  const { lang, setLang } = useLang();
+  const tr = t[lang].nav;
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 80);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const links = [
+    { label: tr.about,    href: "/#o-mnie" },
+    { label: tr.speaking, href: "/#wystapienia" },
+    { label: tr.services, href: "/#uslugi" },
+    { label: tr.courses,  href: "/#kursy" },
+    { label: tr.contact,  href: "/#kontakt" },
+  ];
 
   return (
     <header
@@ -28,36 +29,50 @@ export default function Navbar() {
       } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-3`}
     >
       <div className="flex items-center justify-between gap-6">
-        <Link href="/" className="font-semibold text-gray-900 tracking-tight text-sm">
-          SOLVEXA GROUP
+        <Link href="/" className="flex-shrink-0">
+          <Image
+            src="/images/solvexa-logo.png"
+            alt="Solvexa Group"
+            width={130}
+            height={36}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-gray-500 hover:text-gray-900 transition-colors"
-            >
+            <Link key={l.href} href={l.href} className="text-sm text-gray-700 hover:text-gray-900 transition-colors">
               {l.label}
             </Link>
           ))}
         </nav>
 
-        <div className="hidden md:flex items-center gap-3">
-          <Link
-            href="/#kontakt"
-            className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-800 transition-colors"
+        <div className="hidden md:flex items-center gap-4">
+          <div className="flex items-center gap-1 text-sm">
+            <button
+              onClick={() => setLang("PL")}
+              className={`px-1 transition-colors cursor-pointer ${lang === "PL" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700"}`}
+            >
+              PL
+            </button>
+            <span className="text-gray-300">|</span>
+            <button
+              onClick={() => setLang("EN")}
+              className={`px-1 transition-colors cursor-pointer ${lang === "EN" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700"}`}
+            >
+              EN
+            </button>
+          </div>
+          <button
+            onClick={() => openModal()}
+            className="text-base px-5 py-2.5 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors"
           >
-            Umów rozmowę
-          </Link>
+            {tr.cta}
+          </button>
         </div>
 
-        <button
-          className="md:hidden text-gray-500 hover:text-gray-900"
-          onClick={() => setIsOpen(!isOpen)}
-          aria-label="Toggle menu"
-        >
+        <button className="md:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -73,22 +88,18 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-4 pt-4 pb-2">
               {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={() => setIsOpen(false)}
-                  className="text-gray-500 hover:text-gray-900 transition-colors text-center"
-                >
+                <Link key={l.href} href={l.href} onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-gray-900 transition-colors text-center">
                   {l.label}
                 </Link>
               ))}
-              <Link
-                href="/#kontakt"
-                onClick={() => setIsOpen(false)}
-                className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium text-center"
-              >
-                Umów rozmowę
-              </Link>
+              <button onClick={() => { setIsOpen(false); openModal(); }} className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium text-center">
+                {tr.cta}
+              </button>
+              <div className="flex items-center justify-center gap-2 text-sm pt-1">
+                <button onClick={() => { setLang("PL"); setIsOpen(false); }} className={lang === "PL" ? "font-bold text-gray-900" : "text-gray-400"}>PL</button>
+                <span className="text-gray-300">|</span>
+                <button onClick={() => { setLang("EN"); setIsOpen(false); }} className={lang === "EN" ? "font-bold text-gray-900" : "text-gray-400"}>EN</button>
+              </div>
             </div>
           </motion.div>
         )}
