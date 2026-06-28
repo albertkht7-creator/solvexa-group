@@ -5,17 +5,16 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Providers } from "@/components/providers";
-
 export const metadata: Metadata = {
-  title: "SOLVEXA GROUP | Szkolenia Sprzedażowe - Albert Kohut",
-  description: "Szkolenia sprzedażowe B2B - Albert Kohut, Menedżer sprzedaży w Revolut Biznes. Kursy online, consulting i mentoring dla handlowców, managerów i założycieli.",
-
+  metadataBase: new URL('https://www.solvexagroup.co'),
+  title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
+  description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm. Sprawdź ofertę Solvexa Group.",
   openGraph: {
-    title: "SOLVEXA GROUP | Sales Training — Albert Kohut",
-    description: "B2B sales training with Albert Kohut, Sales Leader at Revolut Business. Online courses, consulting and mentoring for sales reps, managers and founders.",
+    title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
+    description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm.",
     type: "website",
     locale: "pl_PL",
-    alternateLocale: "en_GB",
+    url: "https://www.solvexagroup.co",
   },
 };
 
