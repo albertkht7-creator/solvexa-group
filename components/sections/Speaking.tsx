@@ -27,7 +27,7 @@ export default function Speaking() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerView, setSlidesPerView] = useState(3);
   const [containerWidth, setContainerWidth] = useState(0);
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const desktopRef = useRef<HTMLDivElement>(null);
   const mobileRef = useRef<HTMLDivElement>(null);
@@ -90,7 +90,7 @@ export default function Speaking() {
             height: `${imgHeight}px`,
           }}
           className="rounded-xl overflow-hidden relative cursor-pointer group"
-          onClick={() => setLightboxSrc(src)}
+          onClick={() => setLightboxIndex(i)}
         >
           <Image
             src={src}
@@ -142,7 +142,13 @@ export default function Speaking() {
 
   return (
     <section id="wystapienia" className="py-16 md:py-24 px-4 md:px-6">
-      <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
+      <Lightbox
+        src={lightboxIndex !== null ? IMAGES[lightboxIndex] : null}
+        images={IMAGES}
+        index={lightboxIndex ?? 0}
+        onNavigate={setLightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+      />
       <div className="max-w-6xl mx-auto">
         <div className="mb-10 md:mb-14">
           <span className="inline-block text-xs font-semibold tracking-widest text-white bg-gray-900 uppercase px-3 py-1 rounded-full mb-3">
