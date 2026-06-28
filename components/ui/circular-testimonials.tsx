@@ -68,7 +68,7 @@ export const CircularTestimonials = ({
         transition={{ duration: 0.3, ease: "easeInOut" }}
         className="bg-white border border-gray-200 rounded-2xl p-8 md:p-10 flex flex-col min-h-[260px] shadow-sm"
       >
-        <span className="text-6xl text-orange-500 leading-none mb-4 font-serif select-none">&ldquo;</span>
+        <span className="text-6xl text-[#B8960C] leading-none mb-4 font-serif select-none">&ldquo;</span>
         <p className="text-gray-700 leading-relaxed flex-1 mb-6 text-[15px] md:text-base">
           {active.quote}
         </p>

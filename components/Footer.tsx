@@ -12,11 +12,11 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
         <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="flex items-center gap-3 cursor-pointer">
-            <div className="overflow-visible rounded-xl transition-transform duration-300 hover:scale-[1.4] origin-bottom flex-shrink-0">
+            <div className="overflow-hidden rounded-xl transition-transform duration-300 hover:scale-[1.3] origin-bottom flex-shrink-0">
               <Image
                 src="/images/solvexa-logo.png"
-                width={96}
-                height={28}
+                width={48}
+                height={48}
                 alt="Solvexa Group"
               />
             </div>

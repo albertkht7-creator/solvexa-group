@@ -80,7 +80,7 @@ export function QuotePopup() {
                 <div className="w-10 h-1 bg-orange-500 mb-6" />
                 <p className="text-xl font-bold text-gray-900 leading-snug mb-4 max-md:text-[15px] max-md:leading-[1.45]">
                   {tr.line1}{" "}
-                  <span className="text-orange-500">{tr.highlight}</span>
+                  <span className="text-[#B8960C]">{tr.highlight}</span>
                   {tr.line1end}
                 </p>
                 <p className="text-xl font-bold text-gray-900 leading-snug mb-6 max-md:text-[15px] max-md:leading-[1.45]">

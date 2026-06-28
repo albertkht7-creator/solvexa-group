@@ -101,14 +101,14 @@ export default function Hero() {
               <>
                 Czy wiesz, że większość trenerów sprzedażowych nigdy nie pracowała w sprzedaży?{" "}
                 Jedyne, co sprzedali - to{" "}
-                <span className="text-orange-400">własne szkolenia.</span>{" "}
+                <span className="text-[#B8960C]">własne szkolenia.</span>{" "}
                 Ja sprzedaję każdego dnia od ponad 15 lat. Nie z podręcznika - z doświadczenia.
               </>
             ) : (
               <>
                 Did you know that most sales trainers have never actually worked in sales?{" "}
                 The only thing they&apos;ve ever sold -{" "}
-                <span className="text-orange-400">is their own training.</span>{" "}
+                <span className="text-[#B8960C]">is their own training.</span>{" "}
                 I&apos;ve been selling every day for over 15 years. Not from a textbook - from experience.
               </>
             )}

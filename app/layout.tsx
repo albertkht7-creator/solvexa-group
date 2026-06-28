@@ -9,9 +9,7 @@ import { Providers } from "@/components/providers";
 export const metadata: Metadata = {
   title: "SOLVEXA GROUP | Szkolenia Sprzedażowe - Albert Kohut",
   description: "Szkolenia sprzedażowe B2B - Albert Kohut, Menedżer sprzedaży w Revolut Biznes. Kursy online, consulting i mentoring dla handlowców, managerów i założycieli.",
-  icons: {
-    icon: "/favicon.png",
-  },
+
   openGraph: {
     title: "SOLVEXA GROUP | Sales Training — Albert Kohut",
     description: "B2B sales training with Albert Kohut, Sales Leader at Revolut Business. Online courses, consulting and mentoring for sales reps, managers and founders.",
