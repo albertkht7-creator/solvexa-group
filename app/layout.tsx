@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "SOLVEXA GROUP | Szkolenia Sprzedażowe - Albert Kohut",
   description: "Szkolenia sprzedażowe B2B - Albert Kohut, Menedżer sprzedaży w Revolut Biznes. Kursy online, consulting i mentoring dla handlowców, managerów i założycieli.",
   icons: {
-    icon: "/favicon.ico",
+    icon: "/favicon.png",
   },
   openGraph: {
     title: "SOLVEXA GROUP | Sales Training — Albert Kohut",
