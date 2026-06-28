@@ -31,11 +31,11 @@ export default function Navbar() {
       <div className="flex items-center justify-between gap-6">
         <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="flex items-center gap-3 flex-shrink-0 cursor-pointer">
-            <div className="overflow-visible rounded-lg transition-transform duration-300 hover:scale-[1.3] origin-left">
+            <div className="overflow-visible rounded-xl transition-transform duration-300 hover:scale-[1.4] origin-bottom">
               <Image
                 src="/images/solvexa-logo.png"
-                width={56}
-                height={38}
+                width={96}
+                height={28}
                 alt="Solvexa Group"
                 priority
               />

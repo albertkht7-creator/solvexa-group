@@ -11,7 +11,12 @@ export default function About() {
   const inView = useInView(ref, { once: true, margin: "-100px" });
   const { lang } = useLang();
   const tr = t[lang].about;
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const ABOUT_IMAGES = [
+    "/images/albert-conference.jpg",
+    "/images/albert-headshot.jpg",
+    "/images/albert-revolut-hoodie.jpg",
+  ];
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
     <section id="o-mnie" ref={ref} className="py-16 md:py-24 px-4 md:px-6">
@@ -90,17 +95,23 @@ export default function About() {
           transition={{ duration: 0.7, delay: 0.15 }}
           className="grid grid-cols-2 gap-3"
         >
-          <div className="relative col-span-2 rounded-2xl overflow-hidden aspect-[16/9] cursor-pointer group" onClick={() => setLightboxSrc("/images/albert-conference.jpg")}>
+          <div className="relative col-span-2 rounded-2xl overflow-hidden aspect-[16/9] cursor-pointer group" onClick={() => setLightboxIndex(0)}>
             <Image src="/images/albert-conference.jpg" alt="Albert Kohut" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover object-top transition-transform duration-300 group-hover:scale-105" />
           </div>
-          <div className="relative rounded-2xl overflow-hidden aspect-square cursor-pointer group" onClick={() => setLightboxSrc("/images/albert-headshot.jpg")}>
+          <div className="relative rounded-2xl overflow-hidden aspect-square cursor-pointer group" onClick={() => setLightboxIndex(1)}>
             <Image src="/images/albert-headshot.jpg" alt="Albert Kohut" fill sizes="25vw" className="object-cover object-top transition-transform duration-300 group-hover:scale-105" />
           </div>
-          <div className="relative rounded-2xl overflow-hidden aspect-square cursor-pointer group" onClick={() => setLightboxSrc("/images/albert-revolut-hoodie.jpg")}>
+          <div className="relative rounded-2xl overflow-hidden aspect-square cursor-pointer group" onClick={() => setLightboxIndex(2)}>
             <Image src="/images/albert-revolut-hoodie.jpg" alt="Albert Kohut" fill sizes="25vw" className="object-cover transition-transform duration-300 group-hover:scale-105" />
           </div>
         </motion.div>
-        <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
+        <Lightbox
+          src={lightboxIndex !== null ? ABOUT_IMAGES[lightboxIndex] : null}
+          images={ABOUT_IMAGES}
+          index={lightboxIndex ?? 0}
+          onNavigate={setLightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
       </div>
     </section>
   );
