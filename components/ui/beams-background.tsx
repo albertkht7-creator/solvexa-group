@@ -108,7 +108,10 @@ export function BeamsBackground({
       ctx.restore();
     }
 
+    let isVisible = true;
+
     function animate() {
+      if (!isVisible) return; // pause loop when off-screen
       if (!canvas || !ctx) return;
       const parent = canvas.parentElement;
       const w = parent ? parent.offsetWidth : canvas.width;
@@ -125,11 +128,22 @@ export function BeamsBackground({
       animationFrameRef.current = requestAnimationFrame(animate);
     }
 
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry.isIntersecting;
+        if (isVisible && !wasVisible) animate(); // restart on re-entry
+      },
+      { threshold: 0 }
+    );
+    observer.observe(canvas);
+
     animate();
 
     return () => {
       window.removeEventListener("resize", updateCanvasSize);
       if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+      observer.disconnect();
     };
   }, [intensity]);
 

@@ -29,9 +29,9 @@ export default function Navbar() {
       } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-1.5`}
     >
       <div className="flex items-center justify-between gap-6">
-        <Link href="/" className="flex-shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-          <div className="flex items-center gap-3 cursor-pointer">
-            <div className="overflow-hidden rounded-lg flex-shrink-0 transition-transform duration-300 hover:scale-[2]">
+        <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <div className="flex items-center gap-3 flex-shrink-0 cursor-pointer">
+            <div className="overflow-visible rounded-lg transition-transform duration-300 hover:scale-[1.3] origin-left">
               <Image
                 src="/images/solvexa-logo.png"
                 width={56}
