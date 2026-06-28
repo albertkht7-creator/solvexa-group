@@ -170,7 +170,7 @@ export default function Courses() {
                       )}
                       <span className="text-xl font-bold text-gray-900">{course.price}</span>
                       {"originalPrice" in course && course.originalPrice && (
-                        <span className="text-xs font-semibold text-[#B8960C] bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full mb-0.5">
+                        <span className="text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full mb-0.5">
                           {lang === "EN" ? "Sale" : "Promocja"}
                         </span>
                       )}

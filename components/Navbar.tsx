@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="flex items-center justify-between gap-6">
         <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="flex items-center gap-3 flex-shrink-0 cursor-pointer">
-            <div className="overflow-hidden rounded-xl transition-transform duration-300 hover:scale-[1.3] origin-bottom">
+            <div className="overflow-hidden rounded-xl transition-transform duration-300 hover:scale-[2] origin-bottom">
               <Image
                 src="/images/solvexa-logo.png"
                 width={48}

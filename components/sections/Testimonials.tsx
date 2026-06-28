@@ -109,7 +109,7 @@ export default function Testimonials() {
                   className="px-2"
                 >
                   <div className="bg-white border border-gray-200 rounded-2xl p-8 flex flex-col shadow-sm h-full">
-                    <span className="text-6xl text-[#B8960C] leading-none mb-4 font-serif select-none">&ldquo;</span>
+                    <span className="text-6xl text-[#7A5C00] leading-none mb-4 font-serif select-none">&ldquo;</span>
                     <p className="text-gray-700 leading-relaxed flex-1 mb-6 text-[15px]">{item.quote}</p>
                     <div>
                       <p className="font-bold text-gray-900 text-[15px]">{item.name}</p>
