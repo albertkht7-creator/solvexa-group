@@ -1,5 +1,4 @@
 import Hero from "@/components/sections/Hero";
-import IntroVideo from "@/components/sections/IntroVideo";
 import Manifest from "@/components/sections/Manifest";
 import CredibilityStrip from "@/components/sections/CredibilityStrip";
 import About from "@/components/sections/About";
@@ -30,7 +29,6 @@ export default function HomePage() {
         }} />
       </div>
 
-      <IntroVideo />
       <Manifest />
       <InfiniteGrid>
         <About />
