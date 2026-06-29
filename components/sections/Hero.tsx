@@ -52,7 +52,7 @@ export default function Hero() {
         muted
         loop
         playsInline
-        preload="none"
+        preload="auto"
         className="absolute inset-0 w-full h-full object-cover scale-110 motion-reduce:hidden"
         style={{ willChange: "transform" }}
         src="/videos/rocket-launch.mp4"

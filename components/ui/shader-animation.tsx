@@ -56,21 +56,27 @@ export function ShaderAnimation({ opacity = 1 }: { opacity?: number }) {
 
     let animationId = 0;
     let isVisible = true;
+    let lastTime = 0;
+    const FPS_LIMIT = 30;
 
-    const animate = () => {
-      if (!isVisible) return; // stop scheduling entirely when off-screen
+    const animate = (time: number) => {
+      if (!isVisible) return;
+      if (time - lastTime < 1000 / FPS_LIMIT) {
+        animationId = requestAnimationFrame(animate);
+        return;
+      }
+      lastTime = time;
       uniforms.time.value = (uniforms.time.value as number) + 0.05;
       renderer.render(scene, camera);
-      animationId = requestAnimationFrame(animate); // only reschedule when visible
+      animationId = requestAnimationFrame(animate);
     };
-    animate();
+    requestAnimationFrame(animate);
 
-    // Fully stop the rAF loop when hero scrolls off-screen; restart on re-entry
     const observer = new IntersectionObserver(
       ([entry]) => {
         const wasVisible = isVisible;
         isVisible = entry.isIntersecting;
-        if (isVisible && !wasVisible) animate(); // restart loop on re-entry
+        if (isVisible && !wasVisible) requestAnimationFrame(animate);
       },
       { threshold: 0 }
     );
