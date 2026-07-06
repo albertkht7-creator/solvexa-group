@@ -40,4 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .netlify
-public/videos/
+# public/videos/ — re-enabled so rocket-launch.mp4 deploys to Netlify
