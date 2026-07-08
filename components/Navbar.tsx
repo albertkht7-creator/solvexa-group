@@ -16,6 +16,7 @@ export default function Navbar() {
 
   const links = [
     { label: tr.about,    href: "/#o-mnie" },
+    { label: "AlbertAI", href: "https://albert-ai-pi.vercel.app", external: true },
     { label: tr.speaking, href: "/#wystapienia" },
     { label: tr.services, href: "/#uslugi" },
     { label: tr.courses,  href: "/#kursy" },
@@ -48,8 +49,18 @@ export default function Navbar() {
 
         <nav className="hidden md:flex items-center gap-6">
           {links.map((l) => (
-            <Link key={l.href} href={l.href} className="text-sm text-gray-700 hover:text-gray-900 transition-colors">
-              {l.label}
+            <Link
+              key={l.href}
+              href={l.href}
+              {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              className="text-sm text-gray-700 hover:text-gray-900 transition-colors"
+            >
+              {l.external ? (
+                <span className="inline-flex items-center gap-1">
+                  {l.label}
+                  <span className="text-[10px] font-semibold text-[#7A5C00]">↗</span>
+                </span>
+              ) : l.label}
             </Link>
           ))}
         </nav>
@@ -94,8 +105,19 @@ export default function Navbar() {
           >
             <div className="flex flex-col gap-4 pt-4 pb-2">
               {links.map((l) => (
-                <Link key={l.href} href={l.href} onClick={() => setIsOpen(false)} className="text-gray-700 hover:text-gray-900 transition-colors text-center">
-                  {l.label}
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={l.external ? undefined : () => setIsOpen(false)}
+                  {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                  className="text-gray-700 hover:text-gray-900 transition-colors text-center"
+                >
+                  {l.external ? (
+                    <span className="inline-flex items-center justify-center gap-1">
+                      {l.label}
+                      <span className="text-[10px] font-semibold text-[#7A5C00]">↗</span>
+                    </span>
+                  ) : l.label}
                 </Link>
               ))}
               <button onClick={() => { setIsOpen(false); openModal(); }} className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium text-center">
