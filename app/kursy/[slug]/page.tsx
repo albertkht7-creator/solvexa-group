@@ -13,8 +13,13 @@ export function generateStaticParams() {
   return courses.map((c) => ({ slug: c.slug }));
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }) {
-  const course = getCourseBySlug(params.slug);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const course = getCourseBySlug(slug);
   if (!course) return {};
   return {
     title: `${course.title} - SOLVEXA GROUP`,
@@ -22,8 +27,13 @@ export function generateMetadata({ params }: { params: { slug: string } }) {
   };
 }
 
-export default function CoursePage({ params }: { params: { slug: string } }) {
-  const course = getCourseBySlug(params.slug);
+export default async function CoursePage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const course = getCourseBySlug(slug);
   if (!course) notFound();
 
   return (
