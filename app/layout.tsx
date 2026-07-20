@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import "./globals.css";
@@ -19,13 +20,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Resolved by proxy.ts from the lang cookie or Accept-Language.
+  const lang = (await headers()).get("x-lang") === "EN" ? "EN" : "PL";
+
   return (
-    <html lang="pl" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html
+      lang={lang === "EN" ? "en" : "pl"}
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
+    >
       <head>
         <script
           type="application/ld+json"
@@ -126,7 +133,7 @@ export default function RootLayout({
         />
       </head>
       <body className={GeistSans.className}>
-        <Providers>
+        <Providers initialLang={lang}>
           <Navbar />
           {children}
           <Footer />

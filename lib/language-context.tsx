@@ -13,27 +13,21 @@ const LanguageContext = createContext<LanguageContextValue>({
   setLang: () => {},
 });
 
-// Read the lang cookie synchronously. Called as a lazy useState initializer so
-// it only runs on the client (after hydration) — typeof document guard handles SSR.
-// The proxy.ts sets this cookie before the page HTML is sent, so by the time
-// React runs this function the correct value is already in document.cookie.
-function readLangCookie(): Lang {
-  if (typeof document === "undefined") return "PL"; // SSR: always render PL
-  const entry = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith("lang="));
-  const value = entry?.split("=")[1];
-  return value === "EN" ? "EN" : "PL";
-}
-
 function writeLangCookie(l: Lang) {
   document.cookie = `lang=${l}; path=/; max-age=31536000; SameSite=Lax`;
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // Lazy initializer: reads the cookie on first client render.
-  // On SSR this returns "PL"; on the client it returns whatever the cookie says.
-  const [lang, setLangState] = useState<Lang>(() => readLangCookie());
+export function LanguageProvider({
+  children,
+  initialLang,
+}: {
+  children: React.ReactNode;
+  initialLang: Lang;
+}) {
+  // Resolved by proxy.ts and handed down from the root layout, so the server
+  // and the first client render agree — no hydration mismatch, no flash of the
+  // wrong language.
+  const [lang, setLangState] = useState<Lang>(initialLang);
 
   const setLang = (l: Lang) => {
     setLangState(l);
