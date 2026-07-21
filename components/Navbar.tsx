@@ -20,6 +20,7 @@ export default function Navbar() {
     { label: tr.speaking, href: "/#wystapienia" },
     { label: tr.services, href: "/#uslugi" },
     { label: tr.courses,  href: "/#kursy" },
+    { label: tr.blog,     href: "/blog" },
     { label: tr.contact,  href: "/#kontakt" },
   ];
 

@@ -5,6 +5,7 @@ import About from "@/components/sections/About";
 import Speaking from "@/components/sections/Speaking";
 import Services from "@/components/sections/Services";
 import Courses from "@/components/sections/Courses";
+import BlogPreview from "@/components/sections/BlogPreview";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import WhyItWorks from "@/components/sections/WhyItWorks";
@@ -37,6 +38,7 @@ export default function HomePage() {
         <Services />
         <WhyItWorks />
         <Courses />
+        <BlogPreview />
         <FAQ />
         <Contact />
       </InfiniteGrid>
