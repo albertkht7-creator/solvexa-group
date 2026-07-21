@@ -5,6 +5,7 @@ import matter from "gray-matter";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import BookCallButton from "@/components/BookCallButton";
 
 const postsDir = path.join(process.cwd(), "content/blog");
 
@@ -60,12 +61,12 @@ export default async function BlogPost({
         </article>
         <div className="mt-16 pt-10 border-t border-white/8 text-center">
           <p className="text-white/50 mb-6">Chcesz porozmawiać o sprzedaży?</p>
-          <Link
-            href="/#kontakt"
-            className="inline-flex px-8 py-3 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors"
+          <BookCallButton
+            topic={`Blog: ${post.frontmatter.title}`}
+            className="inline-flex px-8 py-3 rounded-full bg-white text-black font-semibold text-sm hover:bg-white/90 transition-colors cursor-pointer"
           >
             Umów rozmowę z Albertem
-          </Link>
+          </BookCallButton>
         </div>
       </div>
     </main>

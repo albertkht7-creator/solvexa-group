@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getCourseBySlug, courses } from "@/lib/courses";
 import Link from "next/link";
 import { ArrowLeft, Check } from "lucide-react";
+import BookCallButton from "@/components/BookCallButton";
 import {
   Accordion,
   AccordionContent,
@@ -59,12 +60,12 @@ export default async function CoursePage({
           </div>
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">{course.title}</h1>
           <p className="text-xl text-white/50 mb-10">{course.subtitle}</p>
-          <Link
-            href="/#kontakt"
-            className="inline-flex px-8 py-4 rounded-full bg-white text-black font-semibold text-base hover:bg-white/90 transition-colors"
+          <BookCallButton
+            topic={`Zamówienie kursu: ${course.title}`}
+            className="inline-flex px-8 py-4 rounded-full bg-white text-black font-semibold text-base hover:bg-white/90 transition-colors cursor-pointer"
           >
             Zapisz się na kurs
-          </Link>
+          </BookCallButton>
         </div>
       </section>
 
@@ -139,12 +140,12 @@ export default async function CoursePage({
           <p className="text-white/50 mb-8">
             Napisz do mnie - omówimy szczegóły i dopasujemy termin.
           </p>
-          <Link
-            href="/#kontakt"
-            className="inline-flex px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors"
+          <BookCallButton
+            topic={`Kurs: ${course.title}`}
+            className="inline-flex px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors cursor-pointer"
           >
             Umów bezpłatną rozmowę
-          </Link>
+          </BookCallButton>
         </div>
       </section>
     </main>
