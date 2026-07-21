@@ -7,11 +7,13 @@ import Services from "@/components/sections/Services";
 import Courses from "@/components/sections/Courses";
 import BlogPreview from "@/components/sections/BlogPreview";
 import FAQ from "@/components/sections/FAQ";
+import { getAllPosts } from "@/lib/posts";
 import Contact from "@/components/sections/Contact";
 import WhyItWorks from "@/components/sections/WhyItWorks";
 import { InfiniteGrid } from "@/components/ui/the-infinite-grid";
 
 export default function HomePage() {
+  const latestPosts = getAllPosts().slice(0, 3);
   return (
     <main>
       <Hero />
@@ -38,7 +40,7 @@ export default function HomePage() {
         <Services />
         <WhyItWorks />
         <Courses />
-        <BlogPreview />
+        <BlogPreview posts={latestPosts} />
         <FAQ />
         <Contact />
       </InfiniteGrid>

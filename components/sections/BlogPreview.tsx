@@ -4,32 +4,9 @@ import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/lib/language-context";
+import type { PostMeta } from "@/lib/posts";
 
-const posts = [
-  {
-    slug: "cold-calling-bledy",
-    category: "Sprzedaż",
-    title: "5 błędów cold callingu, które zabijają Twoje wyniki",
-    excerpt: "Większość handlowców popełnia te same błędy. Oto jak je wyeliminować i zacząć słyszeć 'tak' częściej niż 'nie'.",
-    readTime: "5 min",
-  },
-  {
-    slug: "pipeline-ktory-konwertuje",
-    category: "Prospecting",
-    title: "Jak zbudować pipeline, który naprawdę konwertuje",
-    excerpt: "Nie chodzi o ilość leadów. Chodzi o właściwych klientów, we właściwym czasie, z właściwym komunikatem.",
-    readTime: "7 min",
-  },
-  {
-    slug: "negocjacje-oferty",
-    category: "Kariera",
-    title: "Negocjacje oferty pracy w sprzedaży — kompletny przewodnik",
-    excerpt: "Większość kandydatów zostawia pieniądze na stole. Dowiedz się jak negocjować wynagrodzenie bez strachu.",
-    readTime: "8 min",
-  },
-];
-
-export default function BlogPreview() {
+export default function BlogPreview({ posts }: { posts: PostMeta[] }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const { lang } = useLang();

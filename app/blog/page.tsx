@@ -1,32 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-
-const posts = [
-  {
-    slug: "cold-calling-bledy",
-    category: "Sprzedaż",
-    title: "5 błędów cold callingu, które zabijają Twoje wyniki",
-    excerpt: "Większość handlowców popełnia te same błędy. Oto jak je wyeliminować.",
-    readTime: "5 min",
-    date: "2026-05-20",
-  },
-  {
-    slug: "pipeline-ktory-konwertuje",
-    category: "Prospecting",
-    title: "Jak zbudować pipeline, który naprawdę konwertuje",
-    excerpt: "Nie chodzi o ilość leadów. Chodzi o właściwych klientów, we właściwym czasie.",
-    readTime: "7 min",
-    date: "2026-05-10",
-  },
-  {
-    slug: "negocjacje-oferty",
-    category: "Kariera",
-    title: "Negocjacje oferty pracy w sprzedaży - kompletny przewodnik",
-    excerpt: "Większość kandydatów zostawia pieniądze na stole. Dowiedz się jak negocjować.",
-    readTime: "8 min",
-    date: "2026-05-01",
-  },
-];
+import { getAllPosts } from "@/lib/posts";
 
 export const metadata = {
   title: "Blog - SOLVEXA GROUP",
@@ -34,6 +8,7 @@ export const metadata = {
 };
 
 export default function BlogPage() {
+  const posts = getAllPosts();
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
       <div className="max-w-4xl mx-auto">
