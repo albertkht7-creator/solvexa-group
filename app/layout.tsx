@@ -49,15 +49,17 @@ export default async function RootLayout({
               "alternateName": "Solvexa Group — Szkolenia Sprzedażowe B2B",
               "url": "https://www.solvexagroup.co",
               "logo": "https://www.solvexagroup.co/images/solvexa-logo.png",
-              "description": "B2B sales training company founded by Albert Kohut. Solvexa Group provides sales training, coaching and consulting for sales teams, managers and founders. Based in Poland and UK. Not affiliated with Solvexa Green Energy.",
+              "description": "B2B sales training company founded by Albert Kohut. Solvexa Group provides sales training, coaching and consulting for sales teams, managers and founders, and courses for people starting or changing careers into sales. Serves clients in Poland, the UK and across Europe. Not affiliated with Solvexa Green Energy or Solvexa Solutions.",
+              "email": "hello@solvexagroup.co",
+              "sameAs": ["https://www.linkedin.com/in/albert-kohut-98b9b815"],
               "founder": {
                 "@type": "Person",
                 "name": "Albert Kohut",
                 "jobTitle": "B2B Sales Trainer",
-                "sameAs": "https://www.linkedin.com/in/albert-kohut"
+                "sameAs": "https://www.linkedin.com/in/albert-kohut-98b9b815"
               },
-              "areaServed": ["Poland", "United Kingdom"],
-              "knowsAbout": ["B2B sales", "cold calling", "sales training", "sales management"]
+              "areaServed": ["Poland", "United Kingdom", "Europe"],
+              "knowsAbout": ["B2B sales", "cold calling", "prospecting", "sales training", "sales management", "sales recruitment"]
             })
           }}
         />
