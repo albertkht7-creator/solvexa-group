@@ -29,7 +29,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = getPost(slug);
   if (!post) return {};
-  return { title: `${post.frontmatter.title}- SOLVEXA GROUP` };
+  const title = `${post.frontmatter.title} - SOLVEXA GROUP`;
+  const description = post.frontmatter.excerpt ?? "";
+  return {
+    title,
+    description,
+    alternates: { canonical: `/blog/${slug}` },
+    openGraph: {
+      title,
+      description,
+      type: "article",
+      url: `https://www.solvexagroup.co/blog/${slug}`,
+      siteName: "Solvexa Group",
+    },
+  };
 }
 
 export default async function BlogPost({
@@ -41,8 +54,36 @@ export default async function BlogPost({
   const post = getPost(slug);
   if (!post) notFound();
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.frontmatter.title,
+    "description": post.frontmatter.excerpt ?? "",
+    "datePublished": post.frontmatter.date ?? undefined,
+    "inLanguage": "pl-PL",
+    "url": `https://www.solvexagroup.co/blog/${slug}`,
+    "mainEntityOfPage": `https://www.solvexagroup.co/blog/${slug}`,
+    "author": {
+      "@type": "Person",
+      "name": "Albert Kohut",
+      "url": "https://www.solvexagroup.co",
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Solvexa Group",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.solvexagroup.co/images/solvexa-logo.png",
+      },
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <div className="max-w-2xl mx-auto">
         <Link
           href="/blog"

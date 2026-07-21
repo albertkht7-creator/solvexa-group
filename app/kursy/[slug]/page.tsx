@@ -22,9 +22,18 @@ export async function generateMetadata({
   const { slug } = await params;
   const course = getCourseBySlug(slug);
   if (!course) return {};
+  const title = `${course.title} - SOLVEXA GROUP`;
   return {
-    title: `${course.title} - SOLVEXA GROUP`,
+    title,
     description: course.description,
+    alternates: { canonical: `/kursy/${slug}` },
+    openGraph: {
+      title,
+      description: course.description,
+      type: "website",
+      url: `https://www.solvexagroup.co/kursy/${slug}`,
+      siteName: "Solvexa Group",
+    },
   };
 }
 
@@ -37,8 +46,26 @@ export default async function CoursePage({
   const course = getCourseBySlug(slug);
   if (!course) notFound();
 
+  const courseSchema = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": course.title,
+    "description": course.description,
+    "inLanguage": "pl-PL",
+    "url": `https://www.solvexagroup.co/kursy/${slug}`,
+    "provider": {
+      "@type": "Organization",
+      "name": "Solvexa Group",
+      "url": "https://www.solvexagroup.co",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
+      />
       {/* Hero */}
       <section className="px-6 py-20 border-b border-white/8">
         <div className="max-w-4xl mx-auto">

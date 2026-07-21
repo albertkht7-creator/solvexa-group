@@ -11,12 +11,14 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.solvexagroup.co'),
   title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
   description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm. Sprawdź ofertę Solvexa Group.",
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
     description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm.",
     type: "website",
     locale: "pl_PL",
     url: "https://www.solvexagroup.co",
+    siteName: "Solvexa Group",
   },
 };
 
@@ -53,6 +55,20 @@ export default async function RootLayout({
               },
               "areaServed": ["Poland", "United Kingdom"],
               "knowsAbout": ["B2B sales", "cold calling", "sales training", "sales management"]
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Solvexa Group",
+              "alternateName": "Solvexa Group — Szkolenia Sprzedażowe B2B",
+              "url": "https://www.solvexagroup.co",
+              "inLanguage": ["pl-PL", "en-GB"],
+              "publisher": { "@type": "Organization", "name": "Solvexa Group" }
             })
           }}
         />
