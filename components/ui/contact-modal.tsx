@@ -95,6 +95,19 @@ export function ContactModal() {
                     <ValidationError field="email" errors={state.errors} className="text-red-500 text-xs mt-1" />
                   </div>
                   <div>
+                    <label className={labelClass}>{tr.language}</label>
+                    <select
+                      name="language"
+                      required
+                      defaultValue={lang === "EN" ? "English" : "Polski"}
+                      className={inputClass}
+                    >
+                      <option value="Polski">{tr.languagePolish}</option>
+                      <option value="English">{tr.languageEnglish}</option>
+                      <option value="Inny">{tr.languageOther}</option>
+                    </select>
+                  </div>
+                  <div>
                     <label className={labelClass}>{tr.message}</label>
                     <textarea
                       key={initialTopic}
