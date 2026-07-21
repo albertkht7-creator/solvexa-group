@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
   description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm. Sprawdź ofertę Solvexa Group.",
   alternates: { canonical: "/" },
+  verification: {
+    google: "dJOAbPaOteEn381QudskCCHSooWeawhA8oqxQbtSuVM",
+  },
   openGraph: {
     title: "Szkolenia Sprzedażowe B2B | Albert Kohut — Solvexa Group",
     description: "Praktyczne szkolenia B2B — 15 lat w sprzedaży. Cold calling, demo, negocjacje. Dla handlowców, managerów i firm.",
