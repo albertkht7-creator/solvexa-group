@@ -88,10 +88,11 @@ export default async function CoursePage({
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">{course.title}</h1>
           <p className="text-xl text-white/50 mb-10">{course.subtitle}</p>
           <BookCallButton
-            topic={`Zamówienie kursu: ${course.title}`}
+            topic={`Lista oczekujących - kurs: ${course.title}`}
+            waitlist
             className="inline-flex px-8 py-4 rounded-full bg-white text-black font-semibold text-base hover:bg-white/90 transition-colors cursor-pointer"
           >
-            Zapisz się na kurs
+            Zapisz się na listę oczekujących
           </BookCallButton>
         </div>
       </section>

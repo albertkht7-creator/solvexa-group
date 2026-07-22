@@ -112,10 +112,10 @@ export default function Courses() {
                   <span className="text-3xl md:text-4xl font-bold text-white">{bundle.salePrice}</span>
                 </div>
                 <button
-                  onClick={() => openModal(`${lang === "EN" ? "Bundle order" : "Zamówienie pakietu"}: ${bundle.title}`)}
+                  onClick={() => openModal(`${lang === "EN" ? "Waitlist - bundle" : "Lista oczekujących - pakiet"}: ${bundle.title}`, { waitlist: true })}
                   className="w-full md:w-auto px-6 py-3 rounded-full bg-white text-gray-900 text-sm font-bold hover:bg-gray-100 transition-colors cursor-pointer whitespace-nowrap"
                 >
-                  {lang === "EN" ? "Order bundle →" : "Zamów pakiet →"}
+                  {lang === "EN" ? "Join the waitlist →" : "Zapisz na listę oczekujących →"}
                 </button>
               </div>
             </div>
@@ -208,10 +208,10 @@ export default function Courses() {
                     </div>
                     <div className="flex justify-end mt-2">
                       <button
-                        onClick={() => openModal(`Zamówienie kursu: ${course.title}`)}
-                        className="px-6 py-2.5 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-700 transition-colors"
+                        onClick={() => openModal(`Lista oczekujących - kurs: ${course.title}`, { waitlist: true })}
+                        className="px-6 py-2.5 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-700 transition-colors cursor-pointer"
                       >
-                        {tr.cta} →
+                        {lang === "EN" ? "Join the waitlist" : "Zapisz na listę oczekujących"} →
                       </button>
                     </div>
                   </div>

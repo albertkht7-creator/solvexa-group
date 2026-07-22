@@ -12,7 +12,7 @@ const inputClass =
 const labelClass = "text-xs text-gray-700 mb-1.5 block font-medium";
 
 export function ContactModal() {
-  const { isOpen, initialTopic, closeModal } = useContactModal();
+  const { isOpen, initialTopic, waitlist, closeModal } = useContactModal();
   const [state, handleSubmit, reset] = useForm("xbdelbzl");
   const { lang } = useLang();
   const tr = t[lang].modal;
@@ -50,7 +50,7 @@ export function ContactModal() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="relative w-full max-w-lg bg-white rounded-2xl shadow-2xl p-8"
+            className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-8"
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -72,8 +72,13 @@ export function ContactModal() {
               </div>
             ) : (
               <>
-                <h3 className="text-2xl font-bold text-gray-900 mb-1">{tr.heading}</h3>
-                <p className="text-sm text-gray-700 mb-6">{tr.sub}</p>
+                {waitlist && (
+                  <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#7A5C00] bg-[#7A5C00]/10 rounded-full px-3 py-1 mb-3">
+                    {tr.waitlistBadge}
+                  </span>
+                )}
+                <h3 className="text-2xl font-bold text-gray-900 mb-1">{waitlist ? tr.waitlistHeading : tr.heading}</h3>
+                <p className="text-sm text-gray-700 mb-6">{waitlist ? tr.waitlistSub : tr.sub}</p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -104,7 +109,6 @@ export function ContactModal() {
                     >
                       <option value="Polski">{tr.languagePolish}</option>
                       <option value="English">{tr.languageEnglish}</option>
-                      <option value="Inny">{tr.languageOther}</option>
                     </select>
                   </div>
                   <div>
@@ -130,7 +134,7 @@ export function ContactModal() {
                     disabled={state.submitting}
                     className="w-full py-4 rounded-full bg-gray-900 text-white font-semibold text-sm hover:bg-gray-700 hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 ease-out disabled:opacity-60 disabled:cursor-not-allowed mt-1"
                   >
-                    {state.submitting ? tr.submitting : tr.submit}
+                    {state.submitting ? tr.submitting : waitlist ? tr.waitlistSubmit : tr.submit}
                   </button>
                 </form>
               </>

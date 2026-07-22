@@ -185,6 +185,10 @@ export const t = {
     modal: {
       heading: "Umów bezpłatną konsultację",
       sub: "Odpiszemy w ciągu 24 godzin.",
+      waitlistBadge: "Wkrótce",
+      waitlistHeading: "Zapisz się na listę oczekujących",
+      waitlistSub: "Ten kurs dopiero powstaje - nie jest jeszcze dostępny. Zostaw zgłoszenie, a zapiszemy Cię na listę oczekujących i damy znać, gdy tylko ruszy.",
+      waitlistSubmit: "Zapisz na listę oczekujących",
       name: "Imię i nazwisko *",
       namePlaceholder: "Jan Kowalski",
       phone: "Numer telefonu *",
@@ -702,6 +706,10 @@ export const t = {
     modal: {
       heading: "Book a free consultation",
       sub: "We'll get back to you within 24 hours.",
+      waitlistBadge: "Coming soon",
+      waitlistHeading: "Join the waitlist",
+      waitlistSub: "This course is still in the works - it isn't available yet. Leave your details and we'll add you to the waitlist and let you know the moment it launches.",
+      waitlistSubmit: "Join the waitlist",
       name: "Full name *",
       namePlaceholder: "John Smith",
       phone: "Phone number *",

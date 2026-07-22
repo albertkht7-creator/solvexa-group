@@ -8,14 +8,16 @@ export default function BookCallButton({
   children,
   topic,
   className,
+  waitlist = false,
 }: {
   children: React.ReactNode;
   topic?: string;
   className?: string;
+  waitlist?: boolean;
 }) {
   const { openModal } = useContactModal();
   return (
-    <button type="button" onClick={() => openModal(topic)} className={className}>
+    <button type="button" onClick={() => openModal(topic, { waitlist })} className={className}>
       {children}
     </button>
   );
