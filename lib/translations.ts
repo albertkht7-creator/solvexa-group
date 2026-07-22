@@ -8,6 +8,14 @@ export const t = {
       blog: "Blog",
       contact: "Kontakt",
       cta: "Umów bezpłatną konsultację",
+      soon: "Wkrótce",
+    },
+    albertAi: {
+      badge: "Już wkrótce",
+      title: "AlbertAI",
+      desc: "Twój AI-owy coach sprzedaży B2B. Pytasz zwykłym językiem, a dostajesz konkretną odpowiedź opartą na realnym doświadczeniu i playbooku Alberta - nie na ogólnikach z internetu.",
+      desc2: "Trwają ostatnie szlify. Ruszamy już niedługo.",
+      close: "Rozumiem",
     },
     hero: {
       label: "Szkolenia sprzedażowe",
@@ -320,6 +328,14 @@ export const t = {
       blog: "Blog",
       contact: "Contact",
       cta: "Book a free consultation",
+      soon: "Soon",
+    },
+    albertAi: {
+      badge: "Coming soon",
+      title: "AlbertAI",
+      desc: "Your AI B2B sales coach. Ask in plain language and get a concrete answer grounded in Albert's real experience and playbook - not generic advice from the internet.",
+      desc2: "We're adding the finishing touches. Launching soon.",
+      close: "Got it",
     },
     hero: {
       label: "Sales Training",
