@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -11,6 +12,8 @@ import { t } from "@/lib/translations";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [albertOpen, setAlbertOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   const { openModal } = useContactModal();
   const { lang, setLang } = useLang();
   const tr = t[lang].nav;
@@ -162,9 +165,12 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* AlbertAI — coming soon */}
-      <AnimatePresence>
-        {albertOpen && (
+      {/* AlbertAI — coming soon. Portaled to <body> so its `fixed` overlay is
+          relative to the viewport, not the header (whose backdrop-blur +
+          transform create a containing block that trapped and clipped it). */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {albertOpen && (
           <motion.div
             key="albert-overlay"
             initial={{ opacity: 0 }}
@@ -180,7 +186,7 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 16 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl p-8 text-center"
+              className="relative w-full max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-8 text-center"
               onClick={(e) => e.stopPropagation()}
             >
               <button
@@ -204,8 +210,10 @@ export default function Navbar() {
               </button>
             </motion.div>
           </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </header>
   );
 }

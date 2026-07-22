@@ -43,6 +43,28 @@ export default function Hero() {
     return () => { cancelled = true; };
   }, [animate]);
 
+  // Pause the background video whenever the Hero is scrolled out of view.
+  // A looping full-screen video keeps decoding forever otherwise, which is
+  // the biggest continuous GPU/CPU cost on older machines. Visually identical
+  // while the Hero is on screen. Users who prefer reduced motion get a still.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.pause();
+      return;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) video.play().catch(() => {});
+        else video.pause();
+      },
+      { threshold: 0.1 }
+    );
+    io.observe(video);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <section ref={scope} className="relative h-screen w-full overflow-hidden flex items-center pt-20">
       {/* Video background */}

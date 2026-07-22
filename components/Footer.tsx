@@ -21,7 +21,7 @@ export default function Footer() {
               />
             </div>
             <span className="text-sm text-gray-600">
-              Albert Kohut - Szkolenia Sprzedażowe
+              {tr.footer.sub}
             </span>
           </div>
         </Link>
