@@ -107,10 +107,6 @@ export default function Courses() {
                 </div>
               </div>
               <div className="flex flex-col items-start md:items-end gap-3 flex-shrink-0">
-                <div className="flex flex-col items-start md:items-end">
-                  <span className="text-gray-500 text-xs line-through">{bundle.listPrice}</span>
-                  <span className="text-3xl md:text-4xl font-bold text-white">{bundle.salePrice}</span>
-                </div>
                 <button
                   onClick={() => openModal(`${lang === "EN" ? "Waitlist - bundle" : "Lista oczekujących - pakiet"}: ${bundle.title}`, { waitlist: true })}
                   className="w-full md:w-auto px-6 py-3 rounded-full bg-white text-gray-900 text-sm font-bold hover:bg-gray-100 transition-colors cursor-pointer whitespace-nowrap"
@@ -163,19 +159,6 @@ export default function Courses() {
                 </div>
 
                 <div className="mt-auto pt-4 border-t border-gray-100">
-                  {"price" in course && course.price && (
-                    <div className="flex items-end gap-2 mb-3">
-                      {"originalPrice" in course && course.originalPrice && (
-                        <span className="text-sm text-gray-400 line-through mb-0.5">{course.originalPrice}</span>
-                      )}
-                      <span className="text-xl font-bold text-gray-900">{course.price}</span>
-                      {"originalPrice" in course && course.originalPrice && (
-                        <span className="text-xs font-semibold text-orange-500 bg-orange-50 border border-orange-200 px-2 py-0.5 rounded-full mb-0.5">
-                          {lang === "EN" ? "Sale" : "Promocja"}
-                        </span>
-                      )}
-                    </div>
-                  )}
                   <button
                     onClick={() => setOpenSlug(isOpen ? null : course.slug)}
                     className="w-full flex items-center justify-between gap-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200 cursor-pointer"

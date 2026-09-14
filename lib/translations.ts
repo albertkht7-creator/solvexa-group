@@ -130,7 +130,6 @@ export const t = {
       expand: "Dowiedz się więcej",
       collapse: "Zwiń",
       cta: "Zamów",
-      price: "199 zł",
     },
     faq: {
       tag: "FAQ",
@@ -454,7 +453,6 @@ export const t = {
       expand: "Learn more",
       collapse: "Collapse",
       cta: "Order",
-      price: "€49",
       items: [
         {
           slug: "cold-calling",
@@ -488,8 +486,6 @@ export const t = {
               ],
             },
           ],
-          price: "€297",
-          originalPrice: "€597",
         },
         {
           slug: "prospecting",
@@ -523,8 +519,6 @@ export const t = {
               ],
             },
           ],
-          price: "€297",
-          originalPrice: "€597",
         },
         {
           slug: "pierwsze-spotkanie",
@@ -559,8 +553,6 @@ export const t = {
               ],
             },
           ],
-          price: "€297",
-          originalPrice: "€597",
         },
         {
           slug: "praca-w-sprzedazy",
@@ -594,8 +586,6 @@ export const t = {
               ],
             },
           ],
-          price: "€47",
-          originalPrice: "€97",
         },
         {
           slug: "zmien-swoje-zycie-zawodowe",
@@ -638,8 +628,6 @@ export const t = {
               ],
             },
           ],
-          price: "€47",
-          originalPrice: "€97",
         },
       ],
       bundle: {
@@ -648,8 +636,6 @@ export const t = {
         subtitle: "The complete B2B sales package",
         description: "Three courses. Three areas that decide every sales rep's results: how to find clients, how to book meetings, and how to uncover what they really need. That's all - and that's enough - to sell more.",
         includes: ["Prospecting", "Cold Calling", "Client Needs Assessment"],
-        listPrice: "€897",
-        salePrice: "€397",
         tag: "Bundle",
       },
     },

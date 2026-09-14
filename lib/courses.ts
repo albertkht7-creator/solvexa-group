@@ -6,8 +6,6 @@ export interface Course {
   tags: string[];
   modules: { title: string; lessons: string[] }[];
   forWhom: { title: string; description: string }[];
-  price: string;
-  originalPrice: string;
 }
 
 export const courses: Course[] = [
@@ -58,8 +56,6 @@ export const courses: Course[] = [
         description: "Sam sprzedajesz swoje usługi i chcesz robić to pewniej.",
       },
     ],
-    price: "990 zł",
-    originalPrice: "1 497 zł",
   },
   {
     slug: "prospecting",
@@ -108,8 +104,6 @@ export const courses: Course[] = [
         description: "Szukasz pierwszych 10 klientów dla swojego produktu.",
       },
     ],
-    price: "990 zł",
-    originalPrice: "1 497 zł",
   },
   {
     slug: "pierwsze-spotkanie",
@@ -159,8 +153,6 @@ export const courses: Course[] = [
         description: "Sam prowadzisz rozmowy z klientami i chcesz to robić skuteczniej.",
       },
     ],
-    price: "990 zł",
-    originalPrice: "1 497 zł",
   },
   {
     slug: "praca-w-sprzedazy",
@@ -209,8 +201,6 @@ export const courses: Course[] = [
         description: "Przechodzisz do sprzedaży i potrzebujesz mapy drogowej.",
       },
     ],
-    price: "197 zł",
-    originalPrice: "397 zł",
   },
   {
     slug: "zmien-swoje-zycie-zawodowe",
@@ -268,8 +258,6 @@ export const courses: Course[] = [
         description: "Masz obawy, ale gdzieś w środku czujesz, że czas coś zmienić.",
       },
     ],
-    price: "197 zł",
-    originalPrice: "397 zł",
   },
 ];
 
@@ -279,9 +267,6 @@ export interface Bundle {
   subtitle: string;
   description: string;
   includes: string[];
-  listPrice: string;
-  originalPrice: string;
-  salePrice: string;
   tag: string;
 }
 
@@ -293,9 +278,6 @@ export const bundles: Bundle[] = [
     description:
       "Trzy kursy. Trzy obszary, które decydują o wyniku każdego handlowca: jak znaleźć klienta, jak umówić spotkanie i jak dowiedzieć się, czego naprawdę potrzebuje. Tylko tyle i aż tyle, żeby sprzedawać więcej.",
     includes: ["Prospecting", "Cold Calling", "Badanie potrzeb klienta"],
-    listPrice: "4 491 zł",
-    originalPrice: "2 991 zł",
-    salePrice: "1 990 zł",
     tag: "Pakiet",
   },
 ];
