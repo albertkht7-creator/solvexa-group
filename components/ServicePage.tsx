@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import BookCallButton from "@/components/BookCallButton";
 import {
   Accordion,
@@ -59,7 +59,12 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
       "@type": "BreadcrumbList",
       itemListElement: [
         { "@type": "ListItem", position: 1, name: "Solvexa Group", item: BASE },
-        { "@type": "ListItem", position: 2, name: d.h1, item: `${BASE}${d.path}` },
+        ...(d.parent
+          ? [
+              { "@type": "ListItem", position: 2, name: d.parent.name, item: `${BASE}${d.parent.path}` },
+              { "@type": "ListItem", position: 3, name: d.h1, item: `${BASE}${d.path}` },
+            ]
+          : [{ "@type": "ListItem", position: 2, name: d.h1, item: `${BASE}${d.path}` }]),
       ],
     },
   ];
@@ -76,7 +81,15 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
 
       <section className="px-6 py-20 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
-          <span className="inline-block text-xs px-3 py-1 rounded-full bg-white/8 text-white/50 border border-white/10 mb-6">
+          {d.parent && (
+            <Link
+              href={d.parent.path}
+              className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white mb-6 transition-colors"
+            >
+              <ArrowLeft size={14} /> {d.parent.name}
+            </Link>
+          )}
+          <span className="block w-fit text-xs px-3 py-1 rounded-full bg-white/8 text-white/50 border border-white/10 mb-6">
             {d.kicker}
           </span>
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 text-balance">{d.h1}</h1>
@@ -127,9 +140,17 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
             <h2 className="text-2xl font-bold text-white mb-8">{d.topicsHeading}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {d.topics.map((t) => (
-                <div key={t.title} className="p-6 rounded-2xl border border-white/10 bg-[#111]">
+                <div key={t.title} className="p-6 rounded-2xl border border-white/10 bg-[#111] flex flex-col">
                   <h3 className="font-semibold text-white mb-3">{t.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{t.text}</p>
+                  <p className="text-sm text-white/50 leading-relaxed mb-4">{t.text}</p>
+                  {t.href && (
+                    <Link
+                      href={t.href}
+                      className="mt-auto inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
+                    >
+                      Zobacz szczegóły <ArrowRight size={14} />
+                    </Link>
+                  )}
                 </div>
               ))}
             </div>

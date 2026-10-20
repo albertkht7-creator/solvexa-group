@@ -7,7 +7,13 @@ import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
 const icons = [Target, Users, UserCheck, Bot, Rocket];
-const pageLinks: Record<number, string> = { 0: "/szkolenia-sprzedazowe-b2b", 2: "/rekrutacja-handlowcow" };
+const pageLinks: Record<number, string> = {
+  0: "/szkolenia-sprzedazowe-b2b",
+  1: "/mentoring-sprzedazowy",
+  2: "/rekrutacja-handlowcow",
+  3: "/szkolenia-sprzedazowe-b2b/ai-w-sprzedazy",
+  4: "/szkolenia-sprzedazowe-b2b/dla-founderow",
+};
 
 const headerVariants = {
   hidden: {},

@@ -1,5 +1,6 @@
 export interface ServicePageData {
   path: string;
+  parent?: { name: string; path: string };
   metaTitle: string;
   metaDescription: string;
   kicker: string;
@@ -18,7 +19,7 @@ export interface ServicePageData {
   whyHeading?: string;
   why?: { title: string; text: string }[];
   topicsHeading?: string;
-  topics?: { title: string; text: string }[];
+  topics?: { title: string; text: string; href?: string }[];
   postsHeading: string;
   posts: { title: string; href: string }[];
   faq: { q: string; a: string }[];
@@ -128,6 +129,7 @@ export const recruitmentPage: ServicePageData = {
   ],
   related: [
     { label: "Szkolenia sprzedażowe B2B", href: "/szkolenia-sprzedazowe-b2b" },
+    { label: "Mentoring sprzedażowy", href: "/mentoring-sprzedazowy" },
     { label: "Kursy online", href: "/#kursy" },
     { label: "Wszystkie usługi", href: "/#uslugi" },
   ],
@@ -177,14 +179,17 @@ export const trainingPage: ServicePageData = {
     {
       title: "Cold calling i prospecting",
       text: "Jak dzwonić bez strachu, z planem i konkretnym celem, i jak znajdować firmy, które faktycznie mogą kupić.",
+      href: "/szkolenia-sprzedazowe-b2b/cold-calling",
     },
     {
       title: "AI w sprzedaży",
       text: "Jak używać AI nie jako zabawki, ale jako narzędzia, które skraca czas pracy i poprawia wyniki handlowców.",
+      href: "/szkolenia-sprzedazowe-b2b/ai-w-sprzedazy",
     },
     {
       title: "Szkolenie dla założycieli startupów",
       text: "Jak rozmawiać z inwestorami, pozyskać pierwszych klientów i nie zepsuć kluczowych rozmów.",
+      href: "/szkolenia-sprzedazowe-b2b/dla-founderow",
     },
   ],
   whyHeading: "Dlaczego uczę inaczej",
@@ -208,17 +213,20 @@ export const trainingPage: ServicePageData = {
       title: "Jak wybrać firmę szkoleniową ze sprzedaży: 6 pytań przed podpisaniem umowy",
       href: "/blog/jak-wybrac-firme-szkoleniowa-ze-sprzedazy",
     },
-    { title: "Cold calling: najczęstsze błędy", href: "/blog/cold-calling-bledy" },
+    { title: "5 błędów cold callingu, które zabijają Twoje wyniki", href: "/blog/cold-calling-bledy" },
     {
-      title: "Kto zadaje pytania, ten prowadzi",
+      title: "Kto zadaje pytania, ten prowadzi rozmowę",
       href: "/blog/kto-zadaje-pytania-ten-prowadzi",
     },
     {
-      title: "Sprzedaż przegrywasz w pierwszych minutach",
+      title: "Sprzedaż przegrywasz w pierwszych dwóch minutach",
       href: "/blog/sprzedaz-przegrywasz-w-pierwszych-minutach",
     },
-    { title: "Demo, które robisz za wcześnie", href: "/blog/demo-ktore-robisz-za-wczesnie" },
-    { title: "Pipeline, który konwertuje", href: "/blog/pipeline-ktory-konwertuje" },
+    {
+      title: "Demo, które robisz za wcześnie, kosztuje Cię deal",
+      href: "/blog/demo-ktore-robisz-za-wczesnie",
+    },
+    { title: "Jak zbudować pipeline, który naprawdę konwertuje", href: "/blog/pipeline-ktory-konwertuje" },
   ],
   faq: [
     {
@@ -241,7 +249,285 @@ export const trainingPage: ServicePageData = {
   ],
   related: [
     { label: "Rekrutacja handlowców", href: "/rekrutacja-handlowcow" },
+    { label: "Mentoring sprzedażowy", href: "/mentoring-sprzedazowy" },
     { label: "Kursy online", href: "/#kursy" },
+    { label: "Wszystkie usługi", href: "/#uslugi" },
+  ],
+};
+
+const trainingParent = { name: "Szkolenia sprzedażowe B2B", path: "/szkolenia-sprzedazowe-b2b" };
+const trainingRelated = (self: string) =>
+  [
+    { label: "Szkolenia sprzedażowe B2B", href: "/szkolenia-sprzedazowe-b2b" },
+    { label: "Cold calling", href: "/szkolenia-sprzedazowe-b2b/cold-calling" },
+    { label: "AI w sprzedaży", href: "/szkolenia-sprzedazowe-b2b/ai-w-sprzedazy" },
+    { label: "Dla founderów", href: "/szkolenia-sprzedazowe-b2b/dla-founderow" },
+    { label: "Rekrutacja handlowców", href: "/rekrutacja-handlowcow" },
+  ].filter((r) => r.href !== self);
+
+const trainingFaq = [
+  {
+    q: "Czy szkolenia są online, czy stacjonarne?",
+    a: "Szkolenia zamknięte dla firm mogą odbywać się stacjonarnie lub zdalnie, do ustalenia indywidualnie.",
+  },
+  {
+    q: "Czy oferujesz szkolenia dla całego zespołu sprzedażowego?",
+    a: "Tak. Prowadzę warsztaty i programy szkoleniowe dedykowane zespołom sprzedażowym. Napisz do mnie, żebyśmy omówili zakres, format i harmonogram.",
+  },
+  {
+    q: "Jak szybko zobaczę pierwsze efekty?",
+    a: "Pierwsze zmiany w podejściu i rozmowach sprzedażowych widać już po kilku tygodniach systematycznej pracy. Wyniki w pipeline po 1-2 miesiącach.",
+  },
+  consultFaq,
+];
+
+export const trainingSubpages: Record<string, ServicePageData> = {
+  "cold-calling": {
+    path: "/szkolenia-sprzedazowe-b2b/cold-calling",
+    parent: trainingParent,
+    metaTitle: "Szkolenie cold calling dla zespołów i handlowców B2B",
+    metaDescription:
+      "Szkolenie cold calling dla handlowców B2B: pierwsze 15 sekund, kwalifikacja pytaniami, obiekcje i umawianie spotkań. Praktyka z 15 lat sprzedaży, online lub na miejscu.",
+    kicker: "Szkolenie",
+    h1: "Szkolenie cold calling",
+    lead: "Twoi handlowcy nauczą się dzwonić bez strachu, z planem i konkretnym celem. Mniej odrzuceń, więcej umówionych spotkań i wymierny wpływ na przychód Twojej firmy.",
+    ctaLabel: "Umów bezpłatną konsultację",
+    ctaTopic: "Szkolenie: cold calling",
+    serviceType: "Szkolenie z cold callingu",
+    schemaDescription:
+      "Szkolenie z cold callingu dla handlowców B2B i zespołów sprzedaży: struktura rozmowy, kwalifikacja pytaniami, praca z obiekcjami i umawianie spotkań.",
+    forWhomHeading: "Dla kogo jest to szkolenie",
+    forWhom: [
+      { title: "Handlowcy B2B", description: "Chcesz dzwonić więcej i skuteczniej." },
+      { title: "SDR / BDR", description: "Budujesz pipeline od zera i potrzebujesz struktury." },
+      {
+        title: "Przedsiębiorcy",
+        description: "Sam sprzedajesz swoje usługi i chcesz robić to pewniej.",
+      },
+    ],
+    scopeHeading: "Co obejmuje szkolenie",
+    scope: [
+      "Dlaczego cold calling wciąż działa",
+      "Przełamywanie bariery pierwszego telefonu",
+      "Badanie klienta przed rozmową",
+      "Pierwsze 15 sekund: hook, który zatrzymuje",
+      "Pitch wartości bez sprzedawania",
+      "Kwalifikacja przez pytania",
+      "Top 10 obiekcji i jak je obalać",
+      "Umówienie spotkania jako cel rozmowy",
+      "Follow-up po cold callu",
+    ],
+    whyHeading: "Jak wygląda to szkolenie",
+    why: [
+      {
+        title: "Mindset i przygotowanie",
+        text: "Zaczynamy od tego, co blokuje większość handlowców: bariery pierwszego telefonu i słabego przygotowania do rozmowy.",
+      },
+      {
+        title: "Struktura rozmowy",
+        text: "Uczę konkretnej struktury: jak zacząć, jak pokazać wartość i jak kwalifikować klienta pytaniami, zamiast mówić o produkcie.",
+      },
+      {
+        title: "Obiekcje i zamknięcie",
+        text: "Cel cold calla to nie sprzedaż, tylko umówienie następnego kroku. Ćwiczymy najczęstsze obiekcje i domykanie spotkania.",
+      },
+    ],
+    postsHeading: "Poradniki o cold callingu i rozmowach sprzedażowych",
+    posts: [
+      { title: "5 błędów cold callingu, które zabijają Twoje wyniki", href: "/blog/cold-calling-bledy" },
+      { title: "Kto zadaje pytania, ten prowadzi rozmowę", href: "/blog/kto-zadaje-pytania-ten-prowadzi" },
+      {
+        title: "Sprzedaż przegrywasz w pierwszych dwóch minutach",
+        href: "/blog/sprzedaz-przegrywasz-w-pierwszych-minutach",
+      },
+      { title: "'Za drogo' prawie nigdy nie znaczy 'za drogo'", href: "/blog/za-drogo-prawie-nigdy-nie-znaczy-za-drogo" },
+      { title: "Jak zbudować pipeline, który naprawdę konwertuje", href: "/blog/pipeline-ktory-konwertuje" },
+    ],
+    faq: [
+      {
+        q: "Czym różni się szkolenie od kursu online z cold callingu?",
+        a: "Kurs online to nagrany materiał, który przerabiasz we własnym tempie. Szkolenie zamknięte dla firmy prowadzę na żywo, w formie ustalonej indywidualnie, dla całego zespołu.",
+      },
+      ...trainingFaq,
+    ],
+    related: [
+      ...trainingRelated("/szkolenia-sprzedazowe-b2b/cold-calling"),
+      { label: "Kurs online: Cold Calling", href: "/kursy/cold-calling" },
+    ],
+  },
+  "ai-w-sprzedazy": {
+    path: "/szkolenia-sprzedazowe-b2b/ai-w-sprzedazy",
+    parent: trainingParent,
+    metaTitle: "Szkolenie AI w sprzedaży dla handlowców i zespołów B2B",
+    metaDescription:
+      "Szkolenie AI w sprzedaży: prospecting, personalizacja outreachu, skrypty rozmów, analiza nagrań i automatyzacja zadań. Narzędzia gotowe do użycia od zaraz.",
+    kicker: "Szkolenie",
+    h1: "Szkolenie AI w sprzedaży",
+    lead: "Szkolenie dla handlowców i zespołów B2B, którzy chcą używać AI nie jako zabawki, ale jako narzędzia, które realnie skraca czas pracy i poprawia wyniki.",
+    ctaLabel: "Umów bezpłatną konsultację",
+    ctaTopic: "Szkolenie: AI w sprzedaży",
+    serviceType: "Szkolenie z wykorzystania AI w sprzedaży",
+    schemaDescription:
+      "Szkolenie z wykorzystania AI w sprzedaży B2B: prospecting, personalizacja outreachu, skrypty rozmów, analiza nagrań i automatyzacja powtarzalnych zadań.",
+    forWhomHeading: "Dla kogo jest to szkolenie",
+    forWhom: [
+      {
+        title: "Handlowcy B2B",
+        description: "Chcesz skrócić czas na zadania, które nie sprzedają, i poświęcić go na rozmowy z klientami.",
+      },
+      {
+        title: "Zespoły sprzedaży",
+        description: "Chcecie wspólnie wdrożyć narzędzia AI w codziennej pracy, a nie testować je każdy osobno.",
+      },
+      {
+        title: "Managerowie sprzedaży",
+        description: "Chcesz, żeby zespół korzystał z AI w sposób, który podnosi wyniki, a nie tylko wygląda nowocześnie.",
+      },
+    ],
+    scopeHeading: "Co obejmuje szkolenie",
+    scope: [
+      "AI w prospectingu i personalizacji outreachu",
+      "Generowanie i optymalizacja skryptów rozmów z pomocą AI",
+      "Analiza nagrań rozmów i automatyczne follow-upy",
+      "Automatyzacja powtarzalnych zadań sprzedażowych",
+      "Praktyczne narzędzia AI gotowe do użycia od zaraz",
+    ],
+    postsHeading: "Powiązane poradniki",
+    posts: [
+      { title: "Jak zbudować pipeline, który naprawdę konwertuje", href: "/blog/pipeline-ktory-konwertuje" },
+      { title: "5 błędów cold callingu, które zabijają Twoje wyniki", href: "/blog/cold-calling-bledy" },
+      {
+        title: "Czego nauczyłem się, słuchając setek rozmów moich handlowców",
+        href: "/blog/czego-nauczylem-sie-sluchajac-setek-rozmow",
+      },
+    ],
+    faq: trainingFaq,
+    related: trainingRelated("/szkolenia-sprzedazowe-b2b/ai-w-sprzedazy"),
+  },
+  "dla-founderow": {
+    path: "/szkolenia-sprzedazowe-b2b/dla-founderow",
+    parent: trainingParent,
+    metaTitle: "Szkolenie dla założycieli startupów: pitch i pierwsi klienci",
+    metaDescription:
+      "Szkolenie dla founderów i cofounderów: pitch inwestorski, rozmowy z VC, term sheet i sprzedaż pierwszym klientom bez działu sprzedaży.",
+    kicker: "Szkolenie",
+    h1: "Szkolenie dla założycieli startupów",
+    lead: "Szkolenie dla cofounderów i twórców startupów: jak rozmawiać z inwestorami, pozyskać pierwszych klientów i nie zepsuć kluczowych rozmów, które decydują o przyszłości projektu.",
+    ctaLabel: "Umów bezpłatną konsultację",
+    ctaTopic: "Szkolenie: założyciele startupów",
+    serviceType: "Szkolenie sprzedażowe dla founderów startupów",
+    schemaDescription:
+      "Szkolenie dla założycieli startupów: pitch inwestorski, rozmowy z VC i aniołami, podstawy negocjacji term sheet i sprzedaż pierwszym klientom bez działu sprzedaży.",
+    forWhomHeading: "Dla kogo jest to szkolenie",
+    forWhom: [
+      {
+        title: "Founderzy i cofounderzy",
+        description: "Szukasz pierwszych klientów dla swojego produktu i nie masz jeszcze działu sprzedaży.",
+      },
+      {
+        title: "Zespoły przed rundą finansowania",
+        description: "Przygotowujecie się do rozmów z inwestorami i chcecie zbudować wiarygodność i trakcję.",
+      },
+    ],
+    scopeHeading: "Co obejmuje szkolenie",
+    scope: [
+      "Jak przygotować i przeprowadzić pitch inwestorski",
+      "Rozmowy z VC i aniołami: co mówić, czego unikać",
+      "Negocjacje term sheet: podstawy bez prawnika",
+      "Jak sprzedać pierwszym klientom bez działu sprzedaży",
+      "Budowanie wiarygodności i trakcji przed rundą",
+    ],
+    postsHeading: "Powiązane poradniki",
+    posts: [
+      { title: "Kto zadaje pytania, ten prowadzi rozmowę", href: "/blog/kto-zadaje-pytania-ten-prowadzi" },
+      {
+        title: "Demo, które robisz za wcześnie, kosztuje Cię deal",
+        href: "/blog/demo-ktore-robisz-za-wczesnie",
+      },
+      { title: "'Za drogo' prawie nigdy nie znaczy 'za drogo'", href: "/blog/za-drogo-prawie-nigdy-nie-znaczy-za-drogo" },
+    ],
+    faq: trainingFaq,
+    related: trainingRelated("/szkolenia-sprzedazowe-b2b/dla-founderow"),
+  },
+};
+
+export const mentoringPage: ServicePageData = {
+  path: "/mentoring-sprzedazowy",
+  metaTitle: "Mentoring sprzedażowy i consulting dla CEO i dyrektorów sprzedaży",
+  metaDescription:
+    "Mentoring sprzedażowy 1:1 dla CEO, sales managerów i dyrektorów sprzedaży: audyt procesu, Sales Playbook, praca na żywym pipeline, KPI i rozwój zespołu.",
+  kicker: "Usługa",
+  h1: "Mentoring i consulting sprzedażowy",
+  lead: "Regularne wsparcie dla CEO, sales managerów i dyrektorów sprzedaży: diagnoza, plan działania, poprawa procesu i rozwój zespołu, z jasną odpowiedzialnością za wynik.",
+  ctaLabel: "Umów bezpłatną konsultację",
+  ctaTopic: "Consulting & Mentoring",
+  serviceType: "Mentoring i consulting sprzedażowy",
+  schemaDescription:
+    "Mentoring i consulting sprzedażowy 1:1 dla CEO, sales managerów i dyrektorów sprzedaży: audyt procesu sprzedaży, Sales Playbook, sesje 1:1, praca na żywym pipeline oraz KPI.",
+  forWhomHeading: "Dla kogo jest ta usługa",
+  forWhom: [
+    {
+      title: "CEO i właściciele firm",
+      description: "Sprzedaż w Twojej firmie opiera się na Tobie i chcesz zbudować proces, który działa bez Ciebie.",
+    },
+    {
+      title: "Sales managerowie",
+      description: "Prowadzisz zespół i potrzebujesz partnera do analizy pipeline, wyników i rozwoju ludzi.",
+    },
+    {
+      title: "Dyrektorzy sprzedaży",
+      description: "Skalujesz sprzedaż i chcesz poprawić proces, KPI i sposób pracy zespołu.",
+    },
+  ],
+  scopeHeading: "Co obejmuje mentoring",
+  scope: [
+    "Audyt procesu sprzedaży",
+    "Budowa Sales Playbook",
+    "Sesje 1:1 co tydzień lub co miesiąc",
+    "Praca na żywym pipeline",
+    "KPI i mierzenie wyników",
+  ],
+  whyHeading: "Czym mentoring różni się od szkolenia",
+  why: [
+    {
+      title: "Pracujemy na Twoich danych",
+      text: "Analizujemy Twoje konkretne sytuacje, pipeline i wyniki w czasie rzeczywistym, a nie ogólne przykłady.",
+    },
+    {
+      title: "Regularne spotkania, nie jednorazowy event",
+      text: "Sesje 1:1 odbywają się w stałym rytmie, co tydzień lub co miesiąc, dzięki czemu zmiany się utrwalają.",
+    },
+    {
+      title: "Jasna odpowiedzialność za wynik",
+      text: "Zaczynamy od diagnozy i planu działania, a wyniki mierzymy KPI, które wspólnie ustalamy.",
+    },
+  ],
+  postsHeading: "Powiązane poradniki",
+  posts: [
+    { title: "Jak zbudować pipeline, który naprawdę konwertuje", href: "/blog/pipeline-ktory-konwertuje" },
+    {
+      title: "Czego nauczyłem się, słuchając setek rozmów moich handlowców",
+      href: "/blog/czego-nauczylem-sie-sluchajac-setek-rozmow",
+    },
+    {
+      title: "Jak wybrać firmę szkoleniową ze sprzedaży: 6 pytań przed podpisaniem umowy",
+      href: "/blog/jak-wybrac-firme-szkoleniowa-ze-sprzedazy",
+    },
+  ],
+  faq: [
+    {
+      q: "Czym różni się mentoring od kursu online?",
+      a: "Kurs to nagrany materiał, który przerabiasz we własnym tempie. Mentoring to praca 1:1: analizujemy Twoje konkretne sytuacje, pipeline i wyniki w czasie rzeczywistym.",
+    },
+    {
+      q: "Jak często odbywają się sesje?",
+      a: "Sesje 1:1 mogą odbywać się co tydzień lub co miesiąc. Rytm ustalamy po bezpłatnej konsultacji, dopasowany do Twojej sytuacji.",
+    },
+    consultFaq,
+  ],
+  related: [
+    { label: "Szkolenia sprzedażowe B2B", href: "/szkolenia-sprzedazowe-b2b" },
+    { label: "Rekrutacja handlowców", href: "/rekrutacja-handlowcow" },
     { label: "Wszystkie usługi", href: "/#uslugi" },
   ],
 };

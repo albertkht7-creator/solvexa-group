@@ -32,6 +32,7 @@ export default function Footer() {
           <Link href="/#uslugi" className="hover:text-gray-900 transition-colors">{tr.nav.services}</Link>
           <Link href="/szkolenia-sprzedazowe-b2b" className="hover:text-gray-900 transition-colors">Szkolenia sprzedażowe B2B</Link>
           <Link href="/rekrutacja-handlowcow" className="hover:text-gray-900 transition-colors">Rekrutacja handlowców</Link>
+          <Link href="/mentoring-sprzedazowy" className="hover:text-gray-900 transition-colors">Mentoring sprzedażowy</Link>
           <Link href="/#kursy" className="hover:text-gray-900 transition-colors">{tr.nav.courses}</Link>
           <Link href="/#kontakt" className="hover:text-gray-900 transition-colors">{tr.nav.contact}</Link>
         </nav>

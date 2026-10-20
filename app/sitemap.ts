@@ -3,6 +3,7 @@ import path from "path";
 import matter from "gray-matter";
 import type { MetadataRoute } from "next";
 import { courses } from "@/lib/courses";
+import { trainingSubpages } from "@/lib/services";
 
 const BASE = "https://www.solvexagroup.co";
 
@@ -50,6 +51,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${BASE}/szkolenia-sprzedazowe-b2b`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    },
+    ...Object.keys(trainingSubpages).map((slug) => ({
+      url: `${BASE}/szkolenia-sprzedazowe-b2b/${slug}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    {
+      url: `${BASE}/mentoring-sprzedazowy`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.9,
