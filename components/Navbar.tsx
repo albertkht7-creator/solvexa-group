@@ -65,13 +65,13 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden min-[1100px]:flex items-center gap-6">
           {links.map((l) =>
             l.comingSoon ? (
               <button
                 key={l.label}
                 onClick={openAlbert}
-                className="text-sm text-gray-700 hover:text-gray-900 transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                className="text-sm text-gray-700 hover:text-gray-900 transition-colors cursor-pointer inline-flex items-center gap-1.5 whitespace-nowrap"
               >
                 {l.label}
                 <span className="text-[9px] font-semibold uppercase tracking-wide text-[#7A5C00] bg-[#7A5C00]/10 rounded-full px-1.5 py-0.5">
@@ -82,7 +82,7 @@ export default function Navbar() {
               <Link
                 key={l.label}
                 href={l.href}
-                className="text-sm text-gray-700 hover:text-gray-900 transition-colors"
+                className="text-sm text-gray-700 hover:text-gray-900 transition-colors whitespace-nowrap"
               >
                 {l.label}
               </Link>
@@ -90,7 +90,7 @@ export default function Navbar() {
           )}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4">
+        <div className="hidden min-[1100px]:flex items-center gap-4">
           <div className="flex items-center gap-1 text-sm">
             <button
               onClick={() => setLang("PL")}
@@ -108,13 +108,13 @@ export default function Navbar() {
           </div>
           <button
             onClick={() => openModal()}
-            className="text-base px-5 py-2.5 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
+            className="text-sm px-4 py-2 rounded-full bg-gray-900 text-white font-medium hover:bg-gray-700 transition-colors whitespace-nowrap"
           >
             {tr.cta}
           </button>
         </div>
 
-        <button className="md:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+        <button className="min-[1100px]:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -126,7 +126,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden overflow-hidden"
+            className="min-[1100px]:hidden overflow-hidden"
           >
             <div className="flex flex-col gap-4 pt-4 pb-2">
               {links.map((l) =>
