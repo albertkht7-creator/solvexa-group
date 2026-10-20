@@ -7,6 +7,7 @@ import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
 const icons = [Target, Users, UserCheck, Bot, Rocket];
+const pageLinks: Record<number, string> = { 0: "/szkolenia-sprzedazowe-b2b", 2: "/rekrutacja-handlowcow" };
 
 const headerVariants = {
   hidden: {},
@@ -91,6 +92,14 @@ export default function Services() {
                         </li>
                       ))}
                     </ul>
+                    {pageLinks[i] && (
+                      <a
+                        href={pageLinks[i]}
+                        className="block text-center text-sm font-medium text-gray-700 hover:text-gray-900 underline underline-offset-4 mb-4"
+                      >
+                        {lang === "EN" ? "Full service page (PL) →" : "Pełny opis usługi →"}
+                      </a>
+                    )}
                     <button
                       onClick={() => openModal(s.modalTopic)}
                       className="w-full py-3 rounded-full bg-gray-900 text-white text-sm font-semibold hover:bg-gray-700 transition-colors text-center cursor-pointer"
