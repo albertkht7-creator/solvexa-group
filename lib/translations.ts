@@ -178,7 +178,6 @@ export const t = {
       step2: "Odezwę się w ciągu 24 godzin z propozycją terminu rozmowy.",
       step3: "Bezpłatna konsultacja - razem ocenimy czy i jak mogę pomóc.",
       cta: "Umów bezpłatną konsultację →",
-      note: "Odpowiedź w 24h.",
       role: "Menedżer sprzedaży · Revolut Biznes",
     },
     modal: {
@@ -686,7 +685,6 @@ export const t = {
       step2: "I'll get back to you within 24 hours to propose a call time.",
       step3: "Free consultation - together we'll assess whether and how I can help.",
       cta: "Book a free consultation →",
-      note: "Response within 24h.",
       role: "Sales Leader @Revolut Business",
     },
     modal: {

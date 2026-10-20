@@ -1,86 +1,65 @@
 import { notFound } from "next/navigation";
-import { getCourseBySlug, courses } from "@/lib/courses";
 import Link from "next/link";
 import { ArrowLeft, Check } from "lucide-react";
 import BookCallButton from "@/components/BookCallButton";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { courses, type Course } from "@/lib/courses";
+import { coursesEn } from "@/lib/courses-en";
+import { pageMetadata } from "@/lib/seo";
+import { BASE_URL, courseSlugMap, type Lang } from "@/lib/routes";
 
-export function generateStaticParams() {
-  return courses.map((c) => ({ slug: c.slug }));
+const enToPl = Object.fromEntries(Object.entries(courseSlugMap).map(([k, v]) => [v, k]));
+
+export function courseList(lang: Lang): Course[] {
+  return lang === "EN" ? coursesEn : courses;
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const course = getCourseBySlug(slug);
+export function courseStaticParams(lang: Lang) {
+  return courseList(lang).map((c) => ({ slug: c.slug }));
+}
+
+export function courseMetadata(lang: Lang, slug: string) {
+  const course = courseList(lang).find((c) => c.slug === slug);
   if (!course) return {};
-  const title = `${course.title} - SOLVEXA GROUP`;
-  return {
-    title,
+  const plSlug = lang === "EN" ? enToPl[slug] : slug;
+  return pageMetadata({
+    lang,
+    plPath: `/kursy/${plSlug}`,
+    title: `${course.title} - SOLVEXA GROUP`,
     description: course.description,
-    alternates: { canonical: `/kursy/${slug}` },
-    openGraph: {
-      title,
-      description: course.description,
-      type: "website",
-      url: `https://www.solvexagroup.co/kursy/${slug}`,
-      siteName: "Solvexa Group",
-    },
-  };
+  });
 }
 
-export default async function CoursePage({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const course = getCourseBySlug(slug);
+export default function CoursePage({ lang, slug }: { lang: Lang; slug: string }) {
+  const en = lang === "EN";
+  const course = courseList(lang).find((c) => c.slug === slug);
   if (!course) notFound();
 
+  const url = `${BASE_URL}${en ? "/en/courses" : "/kursy"}/${slug}`;
   const courseSchema = {
     "@context": "https://schema.org",
     "@type": "Course",
-    "name": course.title,
-    "description": course.description,
-    "inLanguage": "pl-PL",
-    "url": `https://www.solvexagroup.co/kursy/${slug}`,
-    "provider": {
-      "@type": "Organization",
-      "name": "Solvexa Group",
-      "url": "https://www.solvexagroup.co",
-    },
+    name: course.title,
+    description: course.description,
+    inLanguage: en ? "en-GB" : "pl-PL",
+    url,
+    provider: { "@type": "Organization", name: "Solvexa Group", url: BASE_URL },
   };
 
   return (
     <main className="min-h-screen bg-[#0a0a0a] pt-24">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }}
-      />
-      {/* Hero */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
       <section className="px-6 py-20 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
           <Link
-            href="/#kursy"
+            href={en ? "/en#kursy" : "/#kursy"}
             className="inline-flex items-center gap-2 text-sm text-white/40 hover:text-white mb-8 transition-colors"
           >
-            <ArrowLeft size={14} /> Wszystkie kursy
+            <ArrowLeft size={14} /> {en ? "All courses" : "Wszystkie kursy"}
           </Link>
           <div className="flex flex-wrap gap-2 mb-6">
             {course.tags.map((tag) => (
-              <span
-                key={tag}
-                className="text-xs px-3 py-1 rounded-full bg-white/8 text-white/50 border border-white/10"
-              >
+              <span key={tag} className="text-xs px-3 py-1 rounded-full bg-white/8 text-white/50 border border-white/10">
                 {tag}
               </span>
             ))}
@@ -88,32 +67,27 @@ export default async function CoursePage({
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">{course.title}</h1>
           <p className="text-xl text-white/50 mb-10">{course.subtitle}</p>
           <BookCallButton
-            topic={`Lista oczekujących - kurs: ${course.title}`}
+            topic={`${en ? "Waitlist - course" : "Lista oczekujących - kurs"}: ${course.title}`}
             waitlist
             className="inline-flex px-8 py-4 rounded-full bg-white text-black font-semibold text-base hover:bg-white/90 transition-colors cursor-pointer"
           >
-            Zapisz się na listę oczekujących
+            {en ? "Join the waitlist" : "Zapisz się na listę oczekujących"}
           </BookCallButton>
         </div>
       </section>
 
-      {/* Description */}
       <section className="px-6 py-16 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
           <p className="text-lg text-white/60 leading-relaxed">{course.description}</p>
         </div>
       </section>
 
-      {/* For whom */}
       <section className="px-6 py-16 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8">Dla kogo jest ten kurs?</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">{en ? "Who is this course for?" : "Dla kogo jest ten kurs?"}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {course.forWhom.map((item) => (
-              <div
-                key={item.title}
-                className="p-6 rounded-2xl border border-white/10 bg-[#111]"
-              >
+              <div key={item.title} className="p-6 rounded-2xl border border-white/10 bg-[#111]">
                 <div className="flex items-center gap-2 mb-3">
                   <Check size={16} className="text-blue-400" />
                   <span className="font-semibold text-white">{item.title}</span>
@@ -125,10 +99,9 @@ export default async function CoursePage({
         </div>
       </section>
 
-      {/* Curriculum */}
       <section className="px-6 py-16 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8">Program kursu</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">{en ? "Course programme" : "Program kursu"}</h2>
           <Accordion className="space-y-3">
             {course.modules.map((module, i) => (
               <AccordionItem
@@ -145,10 +118,7 @@ export default async function CoursePage({
                 <AccordionContent className="pb-5">
                   <ul className="space-y-2">
                     {module.lessons.map((lesson) => (
-                      <li
-                        key={lesson}
-                        className="flex items-center gap-3 text-sm text-white/50"
-                      >
+                      <li key={lesson} className="flex items-center gap-3 text-sm text-white/50">
                         <span className="w-1 h-1 rounded-full bg-white/30 flex-shrink-0" />
                         {lesson}
                       </li>
@@ -161,18 +131,19 @@ export default async function CoursePage({
         </div>
       </section>
 
-      {/* CTA */}
       <section className="px-6 py-20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Gotowy na zmianę?</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">{en ? "Ready for a change?" : "Gotowy na zmianę?"}</h2>
           <p className="text-white/50 mb-8">
-            Napisz do mnie - omówimy szczegóły i dopasujemy termin.
+            {en
+              ? "Write to me and we will go through the details and agree a date."
+              : "Napisz do mnie - omówimy szczegóły i dopasujemy termin."}
           </p>
           <BookCallButton
-            topic={`Kurs: ${course.title}`}
+            topic={`${en ? "Course" : "Kurs"}: ${course.title}`}
             className="inline-flex px-10 py-4 rounded-full bg-white text-black font-semibold hover:bg-white/90 transition-colors cursor-pointer"
           >
-            Umów bezpłatną rozmowę
+            {en ? "Book a free call" : "Umów bezpłatną rozmowę"}
           </BookCallButton>
         </div>
       </section>

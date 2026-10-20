@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { useLang } from "@/lib/language-context";
 import type { PostMeta } from "@/lib/posts";
+import { lp } from "@/lib/routes";
 
 export default function BlogPreview({ posts }: { posts: PostMeta[] }) {
   const ref = useRef(null);
@@ -27,7 +28,7 @@ export default function BlogPreview({ posts }: { posts: PostMeta[] }) {
               {pl ? "Wiedza w praktyce." : "Knowledge in practice."}
             </h2>
           </div>
-          <Link href="/blog" className="hidden md:flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
+          <Link href={lp(lang, "/blog")} className="hidden md:flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors">
             {pl ? "Wszystkie artykuły" : "All articles"} <ArrowRight size={14} />
           </Link>
         </motion.div>
@@ -52,7 +53,7 @@ export default function BlogPreview({ posts }: { posts: PostMeta[] }) {
               <h3 className="text-lg font-semibold text-white mb-3 leading-snug">{post.title}</h3>
               <p className="text-sm text-white/40 leading-relaxed mb-6">{post.excerpt}</p>
               <Link
-                href={`/blog/${post.slug}`}
+                href={`${pl ? "" : "/en"}/blog/${post.slug}`}
                 className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors group-hover:gap-3"
               >
                 {pl ? "Czytaj więcej" : "Read more"} <ArrowRight size={13} />
@@ -62,7 +63,7 @@ export default function BlogPreview({ posts }: { posts: PostMeta[] }) {
         </div>
 
         <div className="mt-8 md:hidden text-center">
-          <Link href="/blog" className="text-sm text-white/50 hover:text-white transition-colors">
+          <Link href={lp(lang, "/blog")} className="text-sm text-white/50 hover:text-white transition-colors">
             {pl ? "Wszystkie artykuły →" : "All articles →"}
           </Link>
         </div>

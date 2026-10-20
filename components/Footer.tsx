@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
+import { lp } from "@/lib/routes";
 
 export default function Footer() {
   const { lang } = useLang();
@@ -10,7 +11,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-gray-200 bg-gray-50 py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-        <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <Link href={lp(lang, "/")} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="flex items-center gap-3 cursor-pointer">
             <div className="overflow-hidden rounded-xl transition-transform duration-300 hover:scale-[2] origin-bottom flex-shrink-0">
               <Image
@@ -27,14 +28,14 @@ export default function Footer() {
         </Link>
 
         <nav className="flex flex-wrap gap-6 text-sm text-gray-600">
-          <Link href="/#o-mnie" className="hover:text-gray-900 transition-colors">{tr.nav.about}</Link>
-          <Link href="/#wystapienia" className="hover:text-gray-900 transition-colors">{tr.nav.speaking}</Link>
-          <Link href="/#uslugi" className="hover:text-gray-900 transition-colors">{tr.nav.services}</Link>
-          <Link href="/szkolenia-sprzedazowe-b2b" className="hover:text-gray-900 transition-colors">Szkolenia sprzedażowe B2B</Link>
-          <Link href="/rekrutacja-handlowcow" className="hover:text-gray-900 transition-colors">Rekrutacja handlowców</Link>
-          <Link href="/mentoring-sprzedazowy" className="hover:text-gray-900 transition-colors">Mentoring sprzedażowy</Link>
-          <Link href="/#kursy" className="hover:text-gray-900 transition-colors">{tr.nav.courses}</Link>
-          <Link href="/#kontakt" className="hover:text-gray-900 transition-colors">{tr.nav.contact}</Link>
+          <Link href={lp(lang, "/#o-mnie")} className="hover:text-gray-900 transition-colors">{tr.nav.about}</Link>
+          <Link href={lp(lang, "/#wystapienia")} className="hover:text-gray-900 transition-colors">{tr.nav.speaking}</Link>
+          <Link href={lp(lang, "/#uslugi")} className="hover:text-gray-900 transition-colors">{tr.nav.services}</Link>
+          <Link href={lp(lang, "/szkolenia-sprzedazowe-b2b")} className="hover:text-gray-900 transition-colors">{lang === "EN" ? "Sales training B2B" : "Szkolenia sprzedażowe B2B"}</Link>
+          <Link href={lp(lang, "/rekrutacja-handlowcow")} className="hover:text-gray-900 transition-colors">{lang === "EN" ? "Sales recruitment" : "Rekrutacja handlowców"}</Link>
+          <Link href={lp(lang, "/mentoring-sprzedazowy")} className="hover:text-gray-900 transition-colors">{lang === "EN" ? "Sales mentoring" : "Mentoring sprzedażowy"}</Link>
+          <Link href={lp(lang, "/#kursy")} className="hover:text-gray-900 transition-colors">{tr.nav.courses}</Link>
+          <Link href={lp(lang, "/#kontakt")} className="hover:text-gray-900 transition-colors">{tr.nav.contact}</Link>
         </nav>
 
         <a

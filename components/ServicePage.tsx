@@ -8,26 +8,23 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import type { ServicePageData } from "@/lib/services";
+import { BASE_URL, alternatePath, langFromPath } from "@/lib/routes";
+import { pageMetadata } from "@/lib/seo";
 
-const BASE = "https://www.solvexagroup.co";
+const BASE = BASE_URL;
 
 export function serviceMetadata(d: ServicePageData) {
-  const title = `${d.metaTitle} - SOLVEXA GROUP`;
-  return {
-    title,
+  const lang = langFromPath(d.path);
+  return pageMetadata({
+    lang,
+    plPath: lang === "EN" ? (alternatePath(d.path, "PL") ?? d.path) : d.path,
+    title: `${d.metaTitle} - SOLVEXA GROUP`,
     description: d.metaDescription,
-    alternates: { canonical: d.path },
-    openGraph: {
-      title,
-      description: d.metaDescription,
-      type: "website",
-      url: `${BASE}${d.path}`,
-      siteName: "Solvexa Group",
-    },
-  };
+  });
 }
 
 export default function ServicePage({ data: d }: { data: ServicePageData }) {
+  const en = langFromPath(d.path) === "EN";
   const schemas = [
     {
       "@context": "https://schema.org",
@@ -36,7 +33,7 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
       serviceType: d.serviceType,
       description: d.schemaDescription,
       url: `${BASE}${d.path}`,
-      inLanguage: "pl-PL",
+      inLanguage: en ? "en-GB" : "pl-PL",
       areaServed: ["Poland", "United Kingdom", "Europe"],
       provider: {
         "@type": "Organization",
@@ -148,7 +145,7 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
                       href={t.href}
                       className="mt-auto inline-flex items-center gap-2 text-sm text-white/70 hover:text-white transition-colors"
                     >
-                      Zobacz szczegóły <ArrowRight size={14} />
+                      {en ? "See details" : "Zobacz szczegóły"} <ArrowRight size={14} />
                     </Link>
                   )}
                 </div>
@@ -195,7 +192,7 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
 
       <section className="px-6 py-16 border-b border-white/8">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8">Najczęstsze pytania</h2>
+          <h2 className="text-2xl font-bold text-white mb-8">{en ? "Frequently asked questions" : "Najczęstsze pytania"}</h2>
           <Accordion className="space-y-3">
             {d.faq.map((f, i) => (
               <AccordionItem
@@ -215,9 +212,11 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
 
       <section className="px-6 py-20">
         <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">Porozmawiajmy o Twojej sytuacji</h2>
+          <h2 className="text-3xl font-bold text-white mb-4">{en ? "Let's talk about your situation" : "Porozmawiajmy o Twojej sytuacji"}</h2>
           <p className="text-white/50 mb-8">
-            30 minut online, bez zobowiązań. Wspólnie ocenimy, czy i jak mogę pomóc.
+            {en
+              ? "30 minutes online, no commitment. Together we will assess whether and how I can help."
+              : "30 minut online, bez zobowiązań. Wspólnie ocenimy, czy i jak mogę pomóc."}
           </p>
           <BookCallButton
             topic={d.ctaTopic}

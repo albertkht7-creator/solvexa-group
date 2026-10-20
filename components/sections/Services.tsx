@@ -5,6 +5,7 @@ import { Target, Users, UserCheck, Bot, Rocket, ChevronDown } from "lucide-react
 import { useContactModal } from "@/lib/contact-modal-context";
 import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
+import { lp } from "@/lib/routes";
 
 const icons = [Target, Users, UserCheck, Bot, Rocket];
 const pageLinks: Record<number, string> = {
@@ -100,7 +101,7 @@ export default function Services() {
                     </ul>
                     {pageLinks[i] && (
                       <a
-                        href={pageLinks[i]}
+                        href={lp(lang, pageLinks[i])}
                         className="block text-center text-sm font-medium text-gray-700 hover:text-gray-900 underline underline-offset-4 mb-4"
                       >
                         {lang === "EN" ? "Full service page (PL) →" : "Pełny opis usługi →"}

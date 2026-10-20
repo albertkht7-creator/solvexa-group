@@ -8,6 +8,7 @@ import { Menu, X } from "lucide-react";
 import { useContactModal } from "@/lib/contact-modal-context";
 import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
+import { lp } from "@/lib/routes";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,13 +33,13 @@ export default function Navbar() {
   }, [albertOpen]);
 
   const links = [
-    { label: tr.about,    href: "/#o-mnie" },
+    { label: tr.about,    href: lp(lang, "/#o-mnie") },
     { label: "AlbertAI", href: "#", comingSoon: true },
-    { label: tr.speaking, href: "/#wystapienia" },
-    { label: tr.services, href: "/#uslugi" },
-    { label: tr.courses,  href: "/#kursy" },
-    { label: tr.blog,     href: "/blog" },
-    { label: tr.contact,  href: "/#kontakt" },
+    { label: tr.speaking, href: lp(lang, "/#wystapienia") },
+    { label: tr.services, href: lp(lang, "/#uslugi") },
+    { label: tr.courses,  href: lp(lang, "/#kursy") },
+    { label: tr.blog,     href: lp(lang, "/blog") },
+    { label: tr.contact,  href: lp(lang, "/#kontakt") },
   ];
 
   return (
@@ -48,7 +49,7 @@ export default function Navbar() {
       } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-1.5`}
     >
       <div className="flex items-center justify-between gap-6">
-        <Link href="/" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <Link href={lp(lang, "/")} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           <div className="flex items-center gap-3 flex-shrink-0 cursor-pointer">
             <div className="overflow-hidden rounded-xl transition-transform duration-300 hover:scale-[2] origin-bottom">
               <Image

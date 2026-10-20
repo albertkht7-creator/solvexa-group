@@ -1,59 +1,64 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { alternatePath, isEnglishPath } from "@/lib/routes";
 
 /**
- * Picks PL or EN from the browser's Accept-Language header.
+ * Language routing. Polish pages live at the root, English pages under /en, so
+ * the URL itself decides the language of a page and every page is static.
  *
- * We deliberately do NOT use edge geolocation headers here: this site is
- * deployed on Netlify, which does not send Vercel's `x-vercel-ip-country`,
- * so the previous geo-based check always fell through to PL and the EN
- * translation was effectively unreachable. Accept-Language is sent by every
- * browser regardless of host, and it reflects the language the visitor
- * actually reads — a Pole browsing from abroad still gets PL.
- *
- * Anything that lists Polish at all → PL. Everything else → EN.
- * Missing/unparseable header → PL (the site's original default).
+ * The only thing done here is a first-visit convenience redirect from a Polish
+ * URL to its English twin:
+ *  - the visitor chose English earlier (lang cookie = EN), or
+ *  - there is no cookie yet and the browser does not list Polish at all.
+ * Search engine crawlers are never redirected, so both language versions stay
+ * indexable (hreflang in the page metadata links them together). English URLs
+ * are never redirected away.
  */
-function detectLang(acceptLanguage: string | null): "PL" | "EN" {
-  if (!acceptLanguage) return "PL";
-  return /(^|,)\s*pl\b/i.test(acceptLanguage) ? "PL" : "EN";
+const BOT = /bot|crawl|spider|slurp|bingpreview|facebookexternalhit|linkedinbot|embedly|quora|pinterest|whatsapp|telegram|headless|lighthouse/i;
+
+function browserWantsPolish(acceptLanguage: string | null): boolean {
+  if (!acceptLanguage) return true; // missing header -> original default (PL)
+  return /(^|,)\s*pl\b/i.test(acceptLanguage);
 }
 
 export function proxy(request: NextRequest) {
-  // A previously stored cookie always wins — it is either an earlier
-  // auto-detection or the visitor's manual PL|EN click, and a manual choice
-  // must survive every later visit.
+  const { pathname } = request.nextUrl;
   const stored = request.cookies.get("lang")?.value;
-  const lang =
-    stored === "PL" || stored === "EN"
-      ? stored
-      : detectLang(request.headers.get("accept-language"));
+  const isBot = BOT.test(request.headers.get("user-agent") ?? "");
+  const english = isEnglishPath(pathname);
 
-  // Forward the resolved language to the render as a request header so the
-  // server renders the same language the client will show. Without this the
-  // server always rendered PL while the client read the cookie and switched
-  // to EN, which is a hydration mismatch.
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-lang", lang);
-
-  const response = NextResponse.next({ request: { headers: requestHeaders } });
-
-  // Only write on first visit (or if the cookie held a junk value).
-  if (stored !== lang) {
-    response.cookies.set("lang", lang, {
-      path: "/",
-      maxAge: 60 * 60 * 24 * 365, // 1 year
-      sameSite: "lax",
-      // httpOnly defaults to false — client JS must be able to read this cookie
-    });
+  if (!english && !isBot) {
+    const wantsEnglish =
+      stored === "EN" || (stored !== "PL" && !browserWantsPolish(request.headers.get("accept-language")));
+    if (wantsEnglish) {
+      const target = alternatePath(pathname, "EN");
+      if (target) {
+        const url = request.nextUrl.clone();
+        url.pathname = target;
+        const redirect = NextResponse.redirect(url, 307);
+        if (stored !== "EN") {
+          redirect.cookies.set("lang", "EN", { path: "/", maxAge: 60 * 60 * 24 * 365, sameSite: "lax" });
+        }
+        return redirect;
+      }
+    }
   }
 
+  const response = NextResponse.next();
+  if (stored !== "PL" && stored !== "EN" && !isBot) {
+    response.cookies.set("lang", english ? "EN" : "PL", {
+      path: "/",
+      maxAge: 60 * 60 * 24 * 365,
+      sameSite: "lax",
+      // httpOnly defaults to false: client JS reads and writes this cookie on toggle
+    });
+  }
   return response;
 }
 
 export const config = {
   matcher: [
-    // Run on every route except Next.js internals and static assets
-    "/((?!_next/static|_next/image|_next/data|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|woff2?|ttf|eot)$).*)",
+    // Pages only: skip API routes, Next.js internals, metadata files and static assets
+    "/((?!api|_next/static|_next/image|_next/data|favicon\\.ico|sitemap\\.xml|robots\\.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|mp4|woff2?|ttf|eot|ico|txt|xml)$).*)",
   ],
 };

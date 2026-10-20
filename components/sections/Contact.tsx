@@ -98,7 +98,6 @@ export default function Contact() {
                 ? "30 minut, online (Google Meet), bez zobowiązań."
                 : "30 minutes, online (Google Meet), no commitment."}
             </p>
-            <p className="text-sm text-gray-700">{tr.note}</p>
           </div>
         </motion.div>
       </div>
