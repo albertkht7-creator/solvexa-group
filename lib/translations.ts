@@ -207,6 +207,7 @@ export const t = {
       successTitle: "Dziękujemy!",
       successBody: "Odezwiemy się w ciągu 24h.",
       successClose: "Zamknij",
+      closeLabel: "Zamknij okno",
     },
     footer: {
       sub: "Albert Kohut - Szkolenia Sprzedażowe",
@@ -714,6 +715,7 @@ export const t = {
       successTitle: "Thank you!",
       successBody: "We'll get back to you within 24h.",
       successClose: "Close",
+      closeLabel: "Close dialog",
     },
     footer: {
       sub: "Albert Kohut - Sales Training",

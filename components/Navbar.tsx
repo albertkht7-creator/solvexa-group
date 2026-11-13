@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
+import { useModalFocus } from "@/lib/use-modal-focus";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import Image from "next/image";
@@ -19,6 +20,10 @@ export default function Navbar() {
   const { lang, setLang } = useLang();
   const tr = t[lang].nav;
   const ai = t[lang].albertAi;
+  const closeLabel = t[lang].modal.closeLabel;
+  const albertTitleId = `${useId()}-albert-title`;
+  const albertDialogRef = useRef<HTMLDivElement>(null);
+  useModalFocus(albertOpen, albertDialogRef);
 
   // AlbertAI isn't ready for visitors yet — its nav item opens a "coming soon"
   // modal instead of linking to the unfinished app.
@@ -187,20 +192,25 @@ export default function Navbar() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 16 }}
               transition={{ duration: 0.25, ease: "easeOut" }}
-              className="relative w-full max-w-md max-h-[85vh] overflow-y-auto bg-white rounded-2xl shadow-2xl p-8 text-center"
+              ref={albertDialogRef}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={albertTitleId}
+              tabIndex={-1}
+              className="relative w-full max-w-md max-h-[85vh] overflow-y-auto overscroll-contain bg-white rounded-2xl shadow-2xl p-8 text-center focus:outline-none"
               onClick={(e) => e.stopPropagation()}
             >
               <button
                 onClick={() => setAlbertOpen(false)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-gray-900 transition-colors"
-                aria-label="Zamknij"
+                className="absolute top-5 right-5 text-gray-400 hover:text-gray-900 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                aria-label={closeLabel}
               >
                 <X size={20} />
               </button>
               <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#7A5C00] bg-[#7A5C00]/10 rounded-full px-3 py-1 mb-5">
                 {ai.badge}
               </span>
-              <h3 className="text-3xl font-bold text-gray-900 mb-3">{ai.title}</h3>
+              <h3 id={albertTitleId} className="text-3xl font-bold text-gray-900 mb-3">{ai.title}</h3>
               <p className="text-gray-700 leading-relaxed mb-3">{ai.desc}</p>
               <p className="text-sm text-gray-500 mb-7">{ai.desc2}</p>
               <button
