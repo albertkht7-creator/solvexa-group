@@ -9,7 +9,7 @@ import { useLang } from "@/lib/language-context";
 import { t } from "@/lib/translations";
 
 const inputClass =
-  "w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-400 focus-visible:outline-none focus-visible:border-gray-900 focus-visible:ring-2 focus-visible:ring-gray-900/20 transition-colors text-sm";
+  "w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder-gray-500 focus-visible:outline-none focus-visible:border-gray-900 focus-visible:ring-2 focus-visible:ring-gray-900/20 transition-colors text-sm";
 const labelClass = "text-xs text-gray-700 mb-1.5 block font-medium";
 
 export function ContactModal() {
@@ -64,7 +64,7 @@ export function ContactModal() {
           >
             <button
               onClick={closeModal}
-              className="absolute top-5 right-5 text-gray-400 hover:text-gray-900 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+              className="absolute top-5 right-5 text-gray-500 hover:text-gray-900 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
               aria-label={tr.closeLabel}
             >
               <X size={20} />

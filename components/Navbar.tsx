@@ -204,7 +204,7 @@ export default function Navbar() {
             >
               <button
                 onClick={() => setAlbertOpen(false)}
-                className="absolute top-5 right-5 text-gray-400 hover:text-gray-900 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                className="absolute top-5 right-5 text-gray-500 hover:text-gray-900 transition-colors rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
                 aria-label={closeLabel}
               >
                 <X size={20} />
