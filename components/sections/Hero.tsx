@@ -115,23 +115,23 @@ export default function Hero() {
         <motion.div id="hero-sub" initial={{ opacity: 0 }} className="space-y-4 max-w-2xl mb-8">
           <p className="text-xl md:text-2xl font-medium text-white/90">
             {lang === "PL"
-              ? "Dla zespołów i handlowców, którzy chcą sprzedawać więcej – bez teorii, tylko sprawdzone metody."
-              : "For teams and sales reps who want to sell more – no theory, just proven methods."}
+              ? "Dla zespołów i handlowców, którzy chcą sprzedawać więcej - bez teorii, tylko sprawdzone metody."
+              : "For teams and sales reps who want to sell more - no theory, just proven methods."}
           </p>
           <p className="text-lg text-white/90 leading-relaxed" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.4)" }}>
             {lang === "PL" ? (
               <>
                 Czy wiesz, że większość trenerów sprzedażowych nigdy nie pracowała w&nbsp;sprzedaży?{" "}
-                Jedyne, co sprzedali – to{" "}
+                Jedyne, co sprzedali - to{" "}
                 <span className="text-[#7A5C00]">własne szkolenia.</span>{" "}
-                Ja sprzedaję każdego dnia od ponad 15&nbsp;lat. Nie z&nbsp;podręcznika – z&nbsp;doświadczenia.
+                Ja sprzedaję każdego dnia od ponad 15&nbsp;lat. Nie z&nbsp;podręcznika - z&nbsp;doświadczenia.
               </>
             ) : (
               <>
                 Did you know that most sales trainers have never actually worked in sales?{" "}
-                The only thing they&apos;ve ever sold –{" "}
+                The only thing they&apos;ve ever sold -{" "}
                 <span className="text-[#7A5C00]">is their own training.</span>{" "}
-                I&apos;ve been selling every day for over 15&nbsp;years. Not from a textbook – from experience.
+                I&apos;ve been selling every day for over 15&nbsp;years. Not from a textbook - from experience.
               </>
             )}
           </p>

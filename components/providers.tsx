@@ -1,5 +1,6 @@
 "use client";
 import { useEffect } from "react";
+import { MotionConfig } from "framer-motion";
 import { ContactModalProvider } from "@/lib/contact-modal-context";
 import { LanguageProvider } from "@/lib/language-context";
 import { ContactModal } from "@/components/ui/contact-modal";
@@ -12,12 +13,14 @@ export function Providers({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <LanguageProvider>
-      <ContactModalProvider>
-        {children}
-        <ContactModal />
-        <QuotePopup />
-      </ContactModalProvider>
-    </LanguageProvider>
+    <MotionConfig reducedMotion="user">
+      <LanguageProvider>
+        <ContactModalProvider>
+          {children}
+          <ContactModal />
+          <QuotePopup />
+        </ContactModalProvider>
+      </LanguageProvider>
+    </MotionConfig>
   );
 }
