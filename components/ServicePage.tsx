@@ -67,7 +67,7 @@ export default function ServicePage({ data: d }: { data: ServicePageData }) {
   ];
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] pt-24">
+    <main id="main" className="min-h-screen bg-[#0a0a0a] pt-24">
       {schemas.map((s, i) => (
         <script
           key={i}

@@ -16,7 +16,7 @@ import type { Lang } from "@/lib/routes";
 export default function HomePage({ lang }: { lang: Lang }) {
   const latestPosts = getAllPosts(lang).slice(0, 3);
   return (
-    <main>
+    <main id="main">
       <Hero />
 
       {/* Section bridge- warm glow seam between Hero and Manifest */}

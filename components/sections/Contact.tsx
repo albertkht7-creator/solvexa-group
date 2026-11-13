@@ -14,7 +14,7 @@ export default function Contact() {
   const tr = t[lang].contact;
 
   return (
-    <section id="kontakt" ref={ref} className="py-16 md:py-24 px-4 md:px-6">
+    <section id="kontakt" ref={ref} className="scroll-mt-28 py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Left */}
         <motion.div
@@ -48,7 +48,7 @@ export default function Contact() {
             <div className="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0">
               <Image
                 src="/images/albert-quote-bg.jpg"
-                alt="Albert Kohut"
+                alt=""
                 fill
                 sizes="56px"
                 className="object-cover object-top"

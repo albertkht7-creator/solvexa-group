@@ -19,7 +19,7 @@ export default function About() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
-    <section id="o-mnie" ref={ref} className="py-16 md:py-24 px-4 md:px-6">
+    <section id="o-mnie" ref={ref} className="scroll-mt-28 py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         {/* Text */}
         <motion.div

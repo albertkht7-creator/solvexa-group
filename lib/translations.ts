@@ -9,6 +9,8 @@ export const t = {
       contact: "Kontakt",
       cta: "Umów bezpłatną konsultację",
       soon: "Wkrótce",
+      skip: "Przejdź do treści",
+      menuLabel: "Menu",
     },
     albertAi: {
       badge: "Już wkrótce",
@@ -332,6 +334,8 @@ export const t = {
       contact: "Contact",
       cta: "Book a free consultation",
       soon: "Soon",
+      skip: "Skip to content",
+      menuLabel: "Menu",
     },
     albertAi: {
       badge: "Coming soon",

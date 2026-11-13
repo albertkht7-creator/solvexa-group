@@ -44,7 +44,7 @@ export default function BlogPostPage({ lang, slug }: { lang: Lang; slug: string 
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
+    <main id="main" className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }} />
       <div className="max-w-2xl mx-auto">
         <Link

@@ -141,7 +141,7 @@ export default function Speaking() {
   );
 
   return (
-    <section id="wystapienia" className="py-16 md:py-24 px-4 md:px-6">
+    <section id="wystapienia" className="scroll-mt-28 py-16 md:py-24 px-4 md:px-6">
       <Lightbox
         src={lightboxIndex !== null ? IMAGES[lightboxIndex] : null}
         images={IMAGES}

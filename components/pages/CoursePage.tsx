@@ -47,7 +47,7 @@ export default function CoursePage({ lang, slug }: { lang: Lang; slug: string })
   };
 
   return (
-    <main className="min-h-screen bg-[#0a0a0a] pt-24">
+    <main id="main" className="min-h-screen bg-[#0a0a0a] pt-24">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(courseSchema) }} />
       <section className="px-6 py-20 border-b border-white/8">
         <div className="max-w-4xl mx-auto">

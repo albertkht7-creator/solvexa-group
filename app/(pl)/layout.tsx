@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import RootDocument from "@/components/RootDocument";
 import { languageAlternates } from "@/lib/routes";
@@ -24,6 +24,8 @@ export const metadata: Metadata = {
     siteName: "Solvexa Group",
   },
 };
+
+export const viewport: Viewport = { themeColor: "#ffffff" };
 
 export default function PlLayout({ children }: { children: React.ReactNode }) {
   return <RootDocument lang="PL">{children}</RootDocument>;

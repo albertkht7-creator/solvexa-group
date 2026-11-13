@@ -42,7 +42,7 @@ export default function Courses() {
   };
 
   return (
-    <section id="kursy" ref={ref} className="py-16 md:py-24 px-4 md:px-6">
+    <section id="kursy" ref={ref} className="scroll-mt-28 py-16 md:py-24 px-4 md:px-6">
       <div className="max-w-6xl mx-auto">
         <motion.div
           variants={headerVariants}

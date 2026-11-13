@@ -49,7 +49,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 w-[calc(100%-2rem)] max-w-6xl ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-[border-radius] duration-300 w-[calc(100%-2rem)] max-w-6xl ${
         isOpen ? "rounded-2xl" : "rounded-full"
       } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-1.5`}
     >
@@ -61,11 +61,11 @@ export default function Navbar() {
                 src="/images/solvexa-logo.png"
                 width={48}
                 height={48}
-                alt="Solvexa Group"
+                alt=""
                 priority
               />
             </div>
-            <span className="font-bold text-sm tracking-widest uppercase text-gray-900">
+            <span translate="no" className="font-bold text-sm tracking-widest uppercase text-gray-900">
               Solvexa Group
             </span>
           </div>
@@ -100,6 +100,7 @@ export default function Navbar() {
           <div className="flex items-center gap-1 text-sm">
             <button
               onClick={() => setLang("PL")}
+              aria-pressed={lang === "PL"}
               className={`px-1 transition-colors cursor-pointer ${lang === "PL" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700"}`}
             >
               PL
@@ -107,6 +108,7 @@ export default function Navbar() {
             <span className="text-gray-300">|</span>
             <button
               onClick={() => setLang("EN")}
+              aria-pressed={lang === "EN"}
               className={`px-1 transition-colors cursor-pointer ${lang === "EN" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700"}`}
             >
               EN
@@ -120,7 +122,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        <button className="min-[1100px]:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label="Toggle menu">
+        <button className="min-[1100px]:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label={tr.menuLabel} aria-expanded={isOpen}>
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -162,9 +164,9 @@ export default function Navbar() {
                 {tr.cta}
               </button>
               <div className="flex items-center justify-center gap-2 text-sm pt-1">
-                <button onClick={() => { setLang("PL"); setIsOpen(false); }} className={lang === "PL" ? "font-bold text-gray-900" : "text-gray-400"}>PL</button>
+                <button onClick={() => { setLang("PL"); setIsOpen(false); }} aria-pressed={lang === "PL"} className={lang === "PL" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700 transition-colors"}>PL</button>
                 <span className="text-gray-300">|</span>
-                <button onClick={() => { setLang("EN"); setIsOpen(false); }} className={lang === "EN" ? "font-bold text-gray-900" : "text-gray-400"}>EN</button>
+                <button onClick={() => { setLang("EN"); setIsOpen(false); }} aria-pressed={lang === "EN"} className={lang === "EN" ? "font-bold text-gray-900" : "text-gray-400 hover:text-gray-700 transition-colors"}>EN</button>
               </div>
             </div>
           </motion.div>

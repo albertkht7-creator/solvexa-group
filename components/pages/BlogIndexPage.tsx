@@ -21,7 +21,7 @@ export default function BlogIndexPage({ lang }: { lang: Lang }) {
   const posts = getAllPosts(lang);
   const base = en ? "/en/blog" : "/blog";
   return (
-    <main className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
+    <main id="main" className="min-h-screen bg-[#0a0a0a] pt-32 pb-24 px-6">
       <div className="max-w-4xl mx-auto">
         <span className="text-xs font-semibold tracking-widest text-white/40 uppercase">Blog</span>
         <h1 className="text-5xl font-bold text-white mt-3 mb-16">{en ? "Knowledge in practice." : "Wiedza w praktyce."}</h1>

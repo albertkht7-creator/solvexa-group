@@ -104,10 +104,10 @@ export default function Hero() {
 
         {/* Short H1 */}
         <motion.div id="hero-headline" initial={{ opacity: 0 }} className="mb-6" style={{ willChange: "opacity, transform" }}>
-          <h1 className="text-4xl md:text-6xl font-bold text-white leading-snug tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-bold text-white leading-snug tracking-tight text-balance">
             {lang === "PL"
-              ? "Szkolenia sprzedażowe B2B oparte na 15 latach praktyki"
-              : "B2B sales training built on 15 years of practice"}
+              ? "Szkolenia sprzedażowe B2B oparte na 15\u00a0latach praktyki"
+              : "B2B sales training built on 15\u00a0years of practice"}
           </h1>
         </motion.div>
 
@@ -115,23 +115,23 @@ export default function Hero() {
         <motion.div id="hero-sub" initial={{ opacity: 0 }} className="space-y-4 max-w-2xl mb-8">
           <p className="text-xl md:text-2xl font-medium text-white/90">
             {lang === "PL"
-              ? "Dla zespołów i handlowców, którzy chcą sprzedawać więcej - bez teorii, tylko sprawdzone metody."
-              : "For teams and sales reps who want to sell more - no theory, just proven methods."}
+              ? "Dla zespołów i handlowców, którzy chcą sprzedawać więcej – bez teorii, tylko sprawdzone metody."
+              : "For teams and sales reps who want to sell more – no theory, just proven methods."}
           </p>
           <p className="text-lg text-white/90 leading-relaxed" style={{ textShadow: "0 2px 8px rgba(0,0,0,0.4)" }}>
             {lang === "PL" ? (
               <>
-                Czy wiesz, że większość trenerów sprzedażowych nigdy nie pracowała w sprzedaży?{" "}
-                Jedyne, co sprzedali - to{" "}
+                Czy wiesz, że większość trenerów sprzedażowych nigdy nie pracowała w&nbsp;sprzedaży?{" "}
+                Jedyne, co sprzedali – to{" "}
                 <span className="text-[#7A5C00]">własne szkolenia.</span>{" "}
-                Ja sprzedaję każdego dnia od ponad 15 lat. Nie z podręcznika - z doświadczenia.
+                Ja sprzedaję każdego dnia od ponad 15&nbsp;lat. Nie z&nbsp;podręcznika – z&nbsp;doświadczenia.
               </>
             ) : (
               <>
                 Did you know that most sales trainers have never actually worked in sales?{" "}
-                The only thing they&apos;ve ever sold -{" "}
+                The only thing they&apos;ve ever sold –{" "}
                 <span className="text-[#7A5C00]">is their own training.</span>{" "}
-                I&apos;ve been selling every day for over 15 years. Not from a textbook - from experience.
+                I&apos;ve been selling every day for over 15&nbsp;years. Not from a textbook – from experience.
               </>
             )}
           </p>
