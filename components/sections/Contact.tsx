@@ -57,9 +57,6 @@ export default function Contact() {
             <div>
               <p className="text-gray-900 font-semibold text-base">Albert Kohut</p>
               <p className="text-base text-gray-700">{tr.role}</p>
-              <a href="tel:+00000000000" className="text-sm text-gray-500 hover:text-gray-900 transition-colors mt-0.5 inline-block">
-                +00 000 000 000
-              </a>
             </div>
           </div>
         </motion.div>

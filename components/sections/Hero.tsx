@@ -145,7 +145,7 @@ export default function Hero() {
           >
             {t[lang].nav.cta}
           </button>
-          <p className="mt-3 text-sm text-white">
+          <p className="mt-3 text-sm text-gray-900">
             {lang === "PL"
               ? "30 minut, online (Google Meet), bez zobowiązań."
               : "30 minutes, online (Google Meet), no commitment."}
