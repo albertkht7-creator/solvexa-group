@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
 import { useModalFocus } from "@/lib/use-modal-focus";
 import { createPortal } from "react-dom";
 import Link from "next/link";
@@ -14,8 +14,7 @@ import { lp } from "@/lib/routes";
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [albertOpen, setAlbertOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(() => () => {}, () => true, () => false);
   const { openModal } = useContactModal();
   const { lang, setLang } = useLang();
   const tr = t[lang].nav;
@@ -50,7 +49,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-[border-radius] duration-300 w-[calc(100%-2rem)] max-w-6xl ${
+      className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-[border-radius] duration-300 w-[calc(100%-2rem)] max-w-7xl ${
         isOpen ? "rounded-2xl" : "rounded-full"
       } border border-gray-200 bg-white/80 backdrop-blur-md px-6 py-1.5`}
     >
@@ -66,13 +65,13 @@ export default function Navbar() {
                 priority
               />
             </div>
-            <span translate="no" className="font-bold text-sm tracking-widest uppercase text-gray-900">
+            <span translate="no" className="font-bold text-sm tracking-widest uppercase text-gray-900 whitespace-nowrap">
               Solvexa Group
             </span>
           </div>
         </Link>
 
-        <nav className="hidden min-[1100px]:flex items-center gap-6">
+        <nav className="hidden min-[1280px]:flex items-center gap-6">
           {links.map((l) =>
             l.comingSoon ? (
               <button
@@ -112,7 +111,7 @@ export default function Navbar() {
           )}
         </nav>
 
-        <div className="hidden min-[1100px]:flex items-center gap-4">
+        <div className="hidden min-[1280px]:flex items-center gap-4">
           <div className="flex items-center gap-1 text-sm">
             <button
               onClick={() => setLang("PL")}
@@ -138,7 +137,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        <button className="min-[1100px]:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label={tr.menuLabel} aria-expanded={isOpen}>
+        <button className="min-[1280px]:hidden text-gray-500 hover:text-gray-900" onClick={() => setIsOpen(!isOpen)} aria-label={tr.menuLabel} aria-expanded={isOpen}>
           {isOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
@@ -150,7 +149,7 @@ export default function Navbar() {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="min-[1100px]:hidden overflow-hidden"
+            className="min-[1280px]:hidden overflow-hidden"
           >
             <div className="flex flex-col gap-4 pt-4 pb-2">
               {links.map((l) =>
