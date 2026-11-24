@@ -40,6 +40,7 @@ export default function Navbar() {
   const links = [
     { label: tr.about,    href: lp(lang, "/#o-mnie") },
     { label: "AlbertAI", href: "#", comingSoon: true },
+    { label: "WiseHunt", href: "https://wisehunt.vercel.app", external: true },
     { label: tr.speaking, href: lp(lang, "/#wystapienia") },
     { label: tr.services, href: lp(lang, "/#uslugi") },
     { label: tr.courses,  href: lp(lang, "/#kursy") },
@@ -84,6 +85,21 @@ export default function Navbar() {
                   {tr.soon}
                 </span>
               </button>
+            ) : l.external ? (
+              <a
+                key={l.label}
+                href={l.href}
+                target="_blank"
+                rel="noopener"
+                translate="no"
+                className="text-sm text-gray-700 hover:text-gray-900 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap"
+              >
+                {l.label}
+                <span translate="yes" className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wide text-emerald-800 bg-emerald-100 ring-1 ring-emerald-600/20 rounded-full px-1.5 py-0.5">
+                  <span aria-hidden="true" className="size-1 rounded-full bg-emerald-600" />
+                  {tr.new}
+                </span>
+              </a>
             ) : (
               <Link
                 key={l.label}
@@ -149,6 +165,22 @@ export default function Navbar() {
                       {tr.soon}
                     </span>
                   </button>
+                ) : l.external ? (
+                  <a
+                    key={l.label}
+                    href={l.href}
+                    target="_blank"
+                    rel="noopener"
+                    translate="no"
+                    onClick={() => setIsOpen(false)}
+                    className="text-gray-700 hover:text-gray-900 transition-colors text-center inline-flex items-center justify-center gap-1.5"
+                  >
+                    {l.label}
+                    <span translate="yes" className="inline-flex items-center gap-1 text-[9px] font-semibold uppercase tracking-wide text-emerald-800 bg-emerald-100 ring-1 ring-emerald-600/20 rounded-full px-1.5 py-0.5">
+                      <span aria-hidden="true" className="size-1 rounded-full bg-emerald-600" />
+                      {tr.new}
+                    </span>
+                  </a>
                 ) : (
                   <Link
                     key={l.label}
